@@ -16,27 +16,27 @@ class LessonList {
     List<LessonList> lessons = [];
 
     lessons.add(LessonList(
-        topic: "what_is_keigo",
+        topic: "What is Keigo?",
         iconPath: "assets/sakura.svg",
-        lessonPath: "lesson/path"));
+        lessonPath: "lesson/path/what_is_keigo"));
 
     lessons.add(LessonList(
-        topic: "humble_vs_polite",
+        topic: "When to use Keigo?",
         iconPath: "assets/paper-crane.svg",
-        lessonPath: "lesson/Path"));
+        lessonPath: "lessons/when_is_keigo"));
 
     lessons.add(LessonList(
-        topic: "humble_vs_polite",
+        topic: "Sonkeigo vs Kenjougo",
         iconPath: "assets/bamboo.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
-        topic: "humble_vs_polite",
+        topic: "In-groups and Out-groups",
         iconPath: "assets/kimono.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
-        topic: "humble_vs_polite",
+        topic: "召し上がる・いただく",
         iconPath: "assets/ninja.svg",
         lessonPath: "lesson/Path"));
 
