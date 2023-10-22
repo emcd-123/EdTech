@@ -18,14 +18,15 @@ class MyShellRouter {
     routes: <RouteBase>[
       ShellRoute(
           navigatorKey: _shellNavigatorKey,
-          builder: (context, state, child) {
-            return ScaffoldWithNavBar(child: child);
+          // Turned this from builder to pageBuilder as per advise from https://stackoverflow.com/questions/74957312/calling-firebase-auth-login-or-logout-with-flutter-causes-an-assert-registry-co
+          pageBuilder: (context, state, child) {
+            return NoTransitionPage(child: ScaffoldWithNavBar(child: child));
           },
           routes: <RouteBase>[
             GoRoute(
               path: '/learn',
               builder: (context, state) {
-                return const LearnScreen();
+                return LearnScreen();
               },
               // routes: <RouteBase>[
               //   GoRoute(

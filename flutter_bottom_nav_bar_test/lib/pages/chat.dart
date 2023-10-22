@@ -6,7 +6,7 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: const Text("Keigo Dojo")),
       body: const Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
