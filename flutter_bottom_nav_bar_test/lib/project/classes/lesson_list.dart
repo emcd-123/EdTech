@@ -11,6 +11,7 @@ class LessonList {
     required this.lessonPath,
   });
 
+  // ALL THE SVGS WERE FOUND ON SVGREPO.COM GO THERE TO FIND MORE
   static List<LessonList> getLessonList() {
     List<LessonList> lessons = [];
 
@@ -21,42 +22,57 @@ class LessonList {
 
     lessons.add(LessonList(
         topic: "humble_vs_polite",
-        iconPath: "icon/path",
+        iconPath: "assets/paper-crane.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
         topic: "humble_vs_polite",
-        iconPath: "icon/path",
+        iconPath: "assets/bamboo.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
         topic: "humble_vs_polite",
-        iconPath: "icon/path",
+        iconPath: "assets/kimono.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
         topic: "humble_vs_polite",
-        iconPath: "icon/path",
+        iconPath: "assets/ninja.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
         topic: "humble_vs_polite",
-        iconPath: "icon/path",
+        iconPath: "assets/fuji.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
         topic: "humble_vs_polite",
-        iconPath: "icon/path",
+        iconPath: "assets/sushi.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
         topic: "humble_vs_polite",
-        iconPath: "icon/path",
+        iconPath: "assets/sake.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
         topic: "humble_vs_polite",
-        iconPath: "icon/path",
+        iconPath: "assets/letter.svg",
+        lessonPath: "lesson/Path"));
+
+    lessons.add(LessonList(
+        topic: "humble_vs_polite",
+        iconPath: "assets/torii.svg",
+        lessonPath: "lesson/Path"));
+
+    lessons.add(LessonList(
+        topic: "humble_vs_polite",
+        iconPath: "assets/noodles.svg",
+        lessonPath: "lesson/Path"));
+
+    lessons.add(LessonList(
+        topic: "humble_vs_polite",
+        iconPath: "assets/bento.svg",
         lessonPath: "lesson/Path"));
 
     return lessons;

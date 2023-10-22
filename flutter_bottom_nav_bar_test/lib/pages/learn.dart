@@ -51,10 +51,14 @@ class _LearnScreenState extends State<LearnScreen> {
                       width: 80,
                       height: 80,
                       decoration: const BoxDecoration(
-                        color: Colors.grey,
+                        color: Color.fromARGB(120, 158, 158, 158),
                         shape: BoxShape.circle,
                       ),
-                      // child: SvgPicture.asset(lessons[index].iconPath),
+                      child: SvgPicture.asset(
+                        lessons[index].iconPath,
+                        width: 20,
+                        height: 20,
+                      ),
                     ),
                   ],
                 ),
