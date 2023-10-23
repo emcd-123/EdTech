@@ -18,7 +18,7 @@ class LessonList {
     lessons.add(LessonList(
         topic: "What is Keigo?",
         iconPath: "assets/sakura.svg",
-        lessonPath: "lesson/path/what_is_keigo"));
+        lessonPath: "/what_is_keigo"));
 
     lessons.add(LessonList(
         topic: "When to use Keigo?",

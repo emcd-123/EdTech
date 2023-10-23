@@ -3,6 +3,8 @@ import 'package:flutter_bottom_nav_bar_test/project/classes/lesson_list.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:developer' as developer;
 
+import 'package:go_router/go_router.dart';
+
 class LearnScreen extends StatefulWidget {
   LearnScreen({super.key});
 
@@ -46,8 +48,7 @@ class _LearnScreenState extends State<LearnScreen> {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(lessons[index].lessonPath)));
+              GoRouter.of(context).push(lessons[index].lessonPath);
             },
             child: Container(
               height: 110,
