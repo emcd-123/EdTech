@@ -41,37 +41,37 @@ class LessonList {
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
-        topic: "humble_vs_polite",
+        topic: "work in progress",
         iconPath: "assets/fuji.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
-        topic: "humble_vs_polite",
+        topic: "work in progress",
         iconPath: "assets/sushi.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
-        topic: "humble_vs_polite",
+        topic: "work in progress",
         iconPath: "assets/sake.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
-        topic: "humble_vs_polite",
+        topic: "work in progress",
         iconPath: "assets/letter.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
-        topic: "humble_vs_polite",
+        topic: "work in progress",
         iconPath: "assets/torii.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
-        topic: "humble_vs_polite",
+        topic: "work in progress",
         iconPath: "assets/noodles.svg",
         lessonPath: "lesson/Path"));
 
     lessons.add(LessonList(
-        topic: "humble_vs_polite",
+        topic: "work in progress",
         iconPath: "assets/bento.svg",
         lessonPath: "lesson/Path"));
 

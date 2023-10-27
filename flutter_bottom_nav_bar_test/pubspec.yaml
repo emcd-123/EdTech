@@ -81,6 +81,7 @@ flutter:
     - assets/torii.svg
     - assets/noodles.svg
     - assets/bento.svg
+    - assets\irasutoya\study_nihongo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

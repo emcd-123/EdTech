@@ -12,6 +12,16 @@ final GlobalKey<NavigatorState> _rootNavigatorKey =
 final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: "shell");
 
+CustomTransitionPage buildPageWithoutAnimation(
+    {required BuildContext context,
+    required GoRouterState state,
+    required Widget child}) {
+  return CustomTransitionPage(
+      child: child,
+      transitionsBuilder: ((context, animation, secondaryAnimation, child) =>
+          child));
+}
+
 class MyShellRouter {
   GoRouter router = GoRouter(
     navigatorKey: _rootNavigatorKey,
@@ -25,24 +35,32 @@ class MyShellRouter {
         },
         routes: <RouteBase>[
           GoRoute(
-            path: '/learn',
-            builder: (context, state) {
-              return LearnScreen();
-            },
-            // routes: <RouteBase>[
-            //
-            // ],
-          ),
+              path: '/learn',
+              builder: (context, state) {
+                return LearnScreen();
+              },
+              pageBuilder: (context, state) => buildPageWithoutAnimation(
+                  context: context, state: state, child: LearnScreen())
+              // routes: <RouteBase>[
+              //
+              // ],
+              ),
           GoRoute(
               path: '/practice',
               builder: (context, state) {
                 return const PracticeScreen();
-              }),
+              },
+              pageBuilder: (context, state) => buildPageWithoutAnimation(
+                  context: context,
+                  state: state,
+                  child: const PracticeScreen())),
           GoRoute(
               path: '/chat',
               builder: (context, state) {
                 return const ChatScreen();
-              })
+              },
+              pageBuilder: (context, state) => buildPageWithoutAnimation(
+                  context: context, state: state, child: const ChatScreen()))
         ],
       ),
       GoRoute(
