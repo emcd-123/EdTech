@@ -2,6 +2,12 @@ import 'package:flutter_bottom_nav_bar_test/pages/chat.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/learn.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/0_what_is_keigo.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/3_levels_of_respect.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/4_copula.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/5_taberu_nomu.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/6_iru_teiru.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/7_suru.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/8_iku.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/9_kuru.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/practice.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/scaffold_with_nav_bar.dart';
 import 'package:go_router/go_router.dart';
@@ -89,6 +95,42 @@ class MyShellRouter {
         path: '/levels_of_respect',
         builder: (context, state) {
           return const LessonLevelsOfRespect();
+        },
+      ),
+      GoRoute(
+        path: '/copula',
+        builder: (context, state) {
+          return const LessonCopula();
+        },
+      ),
+      GoRoute(
+        path: '/taberu_nomu',
+        builder: (context, state) {
+          return const LessonTaberuNomu();
+        },
+      ),
+      GoRoute(
+        path: '/iru',
+        builder: (context, state) {
+          return const LessonIru();
+        },
+      ),
+      GoRoute(
+        path: '/suru',
+        builder: (context, state) {
+          return const LessonSuru();
+        },
+      ),
+      GoRoute(
+        path: '/iku',
+        builder: (context, state) {
+          return const LessonIku();
+        },
+      ),
+      GoRoute(
+        path: '/kuru',
+        builder: (context, state) {
+          return const LessonKuru();
         },
       ),
     ],

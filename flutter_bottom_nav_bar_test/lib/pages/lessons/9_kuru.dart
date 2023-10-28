@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../project/libraries/page_templates.dart';
 
-class LessonCopula extends StatelessWidget {
-  const LessonCopula({super.key});
+class LessonKuru extends StatelessWidget {
+  const LessonKuru({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class LessonCopula extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           children: [
             templateTitlePage(
-                context, "assets/irasutoya/study_nihongo.png", "Copula: だ・です"),
+                context, "assets/irasutoya/study_nihongo.png", "来る"),
             templateWorkInProgress(context),
           ],
         ),
