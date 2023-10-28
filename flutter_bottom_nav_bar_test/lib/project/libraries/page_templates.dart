@@ -61,3 +61,27 @@ Container templateLessonComplete(context, text) {
     ),
   );
 }
+
+Container templateWorkInProgress(context) {
+  return Container(
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height,
+    color: Colors.white,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Container(
+          padding: const EdgeInsets.only(left: 15, right: 15),
+          child: const Text("This lesson is still being developed."),
+        ),
+        ElevatedButton(
+            onPressed: () {
+              GoRouter.of(context).pop(context);
+            },
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.red)),
+            child: const Text("Return to Lessons Page"))
+      ],
+    ),
+  );
+}

@@ -1,11 +1,15 @@
 import 'package:flutter_bottom_nav_bar_test/pages/chat.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/learn.dart';
-import 'package:flutter_bottom_nav_bar_test/pages/lessons/what_is_keigo.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/0_what_is_keigo.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/3_levels_of_respect.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/practice.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/scaffold_with_nav_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bottom_nav_bar_test/main.dart';
+
+import '../../pages/lessons/1_why_learn_keigo.dart';
+import '../../pages/lessons/2_when_to_use.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: "root");
@@ -67,6 +71,24 @@ class MyShellRouter {
         path: '/what_is_keigo',
         builder: (context, state) {
           return const LessonWhatIsKeigo();
+        },
+      ),
+      GoRoute(
+        path: '/why_learn_keigo',
+        builder: (context, state) {
+          return const LessonWhyLearnKeigo();
+        },
+      ),
+      GoRoute(
+        path: '/when_to_use',
+        builder: (context, state) {
+          return const LessonWhenToUse();
+        },
+      ),
+      GoRoute(
+        path: '/levels_of_respect',
+        builder: (context, state) {
+          return const LessonLevelsOfRespect();
         },
       ),
     ],

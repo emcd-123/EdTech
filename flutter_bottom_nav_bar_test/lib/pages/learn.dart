@@ -37,13 +37,13 @@ class _LearnScreenState extends State<LearnScreen> {
 
   SizedBox _lessonsButtons() {
     return SizedBox(
-      width: 350,
       child: ListView.separated(
-        padding: const EdgeInsets.only(top: 15),
+        padding:
+            const EdgeInsets.only(top: 15, bottom: 15, left: 25, right: 25),
         itemCount: lessons.length,
         scrollDirection: Axis.vertical,
         separatorBuilder: (context, index) => const SizedBox(
-          height: 15,
+          height: 20,
         ),
         itemBuilder: (context, index) {
           return GestureDetector(
@@ -54,8 +54,15 @@ class _LearnScreenState extends State<LearnScreen> {
               height: 110,
               decoration: BoxDecoration(
                 color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.shade600,
+                    spreadRadius: 1,
+                    blurRadius: 8,
+                  ),
+                ],
                 borderRadius: BorderRadius.circular(15),
-                border: Border.all(width: 4, color: Colors.grey),
+                //border: Border.all(width: 4, color: Colors.grey),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

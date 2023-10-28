@@ -21,19 +21,19 @@ class LessonList {
         lessonPath: "/what_is_keigo"));
 
     lessons.add(LessonList(
-        topic: "When to use Keigo?",
-        iconPath: "assets/paper-crane.svg",
-        lessonPath: "lessons/when_is_keigo"));
+        topic: "Why Learn Keigo?",
+        iconPath: "assets/koi.svg",
+        lessonPath: "/why_learn_keigo"));
 
     lessons.add(LessonList(
-        topic: "Sonkeigo vs Kenjougo",
+        topic: "When to Use Keigo",
         iconPath: "assets/bamboo.svg",
-        lessonPath: "lesson/Path"));
+        lessonPath: "/when_to_use"));
 
     lessons.add(LessonList(
-        topic: "In-groups and Out-groups",
+        topic: "Levels of Respect",
         iconPath: "assets/kimono.svg",
-        lessonPath: "lesson/Path"));
+        lessonPath: "/levels_of_respect"));
 
     lessons.add(LessonList(
         topic: "召し上がる・いただく",
