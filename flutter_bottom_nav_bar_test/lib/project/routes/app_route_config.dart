@@ -10,6 +10,25 @@ import 'package:flutter_bottom_nav_bar_test/pages/lessons/16_shitteiru.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/17_yomu.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/18_ageru.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/19_kiru.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/20_au.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/21_sumu.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/22_neru.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/23_shinu.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/24_nado.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/25_meishi.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/26_jin.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/27_toshi.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/28_sama.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/29_ikaga.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/30_dochira.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/31_shoushou.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/32_asu.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/33_mamonaku.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/34_kono_aida.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/35_sakujitsu.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/36_sakihodo.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/37_totemo.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/38_summary.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/3_levels_of_respect.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/4_copula.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/5_taberu_nomu.dart';
@@ -201,6 +220,120 @@ class MyShellRouter {
         path: '/kiru',
         builder: (context, state) {
           return const LessonKiru();
+        },
+      ),
+      GoRoute(
+        path: '/au',
+        builder: (context, state) {
+          return const LessonAu();
+        },
+      ),
+      GoRoute(
+        path: '/sumu',
+        builder: (context, state) {
+          return const LessonSumu();
+        },
+      ),
+      GoRoute(
+        path: '/neru',
+        builder: (context, state) {
+          return const LessonNeru();
+        },
+      ),
+      GoRoute(
+        path: '/shinu',
+        builder: (context, state) {
+          return const LessonShinu();
+        },
+      ),
+      GoRoute(
+        path: '/nado',
+        builder: (context, state) {
+          return const LessonNado();
+        },
+      ),
+      GoRoute(
+        path: '/meishi',
+        builder: (context, state) {
+          return const LessonMeishi();
+        },
+      ),
+      GoRoute(
+        path: '/jin',
+        builder: (context, state) {
+          return const LessonJin();
+        },
+      ),
+      GoRoute(
+        path: '/toshi',
+        builder: (context, state) {
+          return const LessonToshi();
+        },
+      ),
+      GoRoute(
+        path: '/sama',
+        builder: (context, state) {
+          return const LessonSama();
+        },
+      ),
+      GoRoute(
+        path: '/ikaga',
+        builder: (context, state) {
+          return const LessonIkaga();
+        },
+      ),
+      GoRoute(
+        path: '/dochira',
+        builder: (context, state) {
+          return const LessonDochira();
+        },
+      ),
+      GoRoute(
+        path: '/shoushou',
+        builder: (context, state) {
+          return const LessonShoushou();
+        },
+      ),
+      GoRoute(
+        path: '/asu',
+        builder: (context, state) {
+          return const LessonAsu();
+        },
+      ),
+      GoRoute(
+        path: '/mamonaku',
+        builder: (context, state) {
+          return const LessonMamonaku();
+        },
+      ),
+      GoRoute(
+        path: '/kono_aida',
+        builder: (context, state) {
+          return const LessonKonoAida();
+        },
+      ),
+      GoRoute(
+        path: '/sakujitsu',
+        builder: (context, state) {
+          return const LessonSakujitsu();
+        },
+      ),
+      GoRoute(
+        path: '/sakihodo',
+        builder: (context, state) {
+          return const LessonSakihodo();
+        },
+      ),
+      GoRoute(
+        path: '/totemo',
+        builder: (context, state) {
+          return const LessonTotemo();
+        },
+      ),
+      GoRoute(
+        path: '/summary',
+        builder: (context, state) {
+          return const LessonSummary();
         },
       ),
     ],

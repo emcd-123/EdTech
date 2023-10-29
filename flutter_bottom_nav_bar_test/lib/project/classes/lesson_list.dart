@@ -123,6 +123,140 @@ class LessonList {
         iconPath: "assets/svg/bento.svg",
         lessonPath: "/kiru"));
 
+    lessons.add(LessonList(
+        topic: "To Meet: 会う",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/au"));
+
+    lessons.add(LessonList(
+        topic: "To Live: 住む",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/sumu"));
+
+    lessons.add(LessonList(
+        topic: "To Sleep: 寝る",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/neru"));
+
+    lessons.add(LessonList(
+        topic: "To Die: 死ぬ",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/shinu"));
+
+    lessons.add(LessonList(
+        topic: "Other Verbs",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/nado"));
+
+    lessons.add(LessonList(
+        topic: "Nouns",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/meishi"));
+
+    lessons.add(
+      LessonList(
+        topic: "人・方",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/jin",
+      ),
+    );
+
+    lessons.add(
+      LessonList(
+        topic: "年",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/toshi",
+      ),
+    );
+
+    lessons.add(
+      LessonList(
+        topic: "さん・さま",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/sama",
+      ),
+    );
+
+    lessons.add(
+      LessonList(
+        topic: "いかが",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/ikaga",
+      ),
+    );
+
+    lessons.add(
+      LessonList(
+        topic: "どちら・こちら・そちら・あちら",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/dochira",
+      ),
+    );
+
+    lessons.add(
+      LessonList(
+        topic: "少々",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/shoushou",
+      ),
+    );
+
+    lessons.add(
+      LessonList(
+        topic: "明日",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/asu",
+      ),
+    );
+
+    lessons.add(
+      LessonList(
+        topic: "まもなく",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/mamonaku",
+      ),
+    );
+
+    lessons.add(
+      LessonList(
+        topic: "この間",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/kono_aida",
+      ),
+    );
+
+    lessons.add(
+      LessonList(
+        topic: "昨日",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/sakujitsu",
+      ),
+    );
+
+    lessons.add(
+      LessonList(
+        topic: "先ほど",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/sakihodo",
+      ),
+    );
+
+    lessons.add(
+      LessonList(
+        topic: "とても",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/totemo",
+      ),
+    );
+
+    lessons.add(
+      LessonList(
+        topic: "Summary",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/summary",
+      ),
+    );
+
     return lessons;
   }
 }
