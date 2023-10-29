@@ -74,14 +74,54 @@ class LessonList {
     );
 
     lessons.add(LessonList(
-        topic: "work in progress",
+        topic: "In Groups and Out Groups",
         iconPath: "assets/svg/noodles.svg",
-        lessonPath: "lesson/Path"));
+        lessonPath: "/uchi_soto"));
 
     lessons.add(LessonList(
-        topic: "work in progress",
+        topic: "To Carry: 持っていく",
         iconPath: "assets/svg/bento.svg",
-        lessonPath: "lesson/Path"));
+        lessonPath: "/motte"));
+
+    lessons.add(LessonList(
+        topic: "To See: 見る",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/miru"));
+
+    lessons.add(LessonList(
+        topic: "To Say: 言う",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/iu"));
+
+    lessons.add(LessonList(
+        topic: "To Think: 思う",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/omou"));
+
+    lessons.add(LessonList(
+        topic: "To Ask: 聞く",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/kiku"));
+
+    lessons.add(LessonList(
+        topic: "To Know: 知っている",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/shitteiru"));
+
+    lessons.add(LessonList(
+        topic: "To Read: 読む",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/yomu"));
+
+    lessons.add(LessonList(
+        topic: "あげる・くれる・もらう",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/ageru"));
+
+    lessons.add(LessonList(
+        topic: "To Wear: 着る",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/kiru"));
 
     return lessons;
   }
