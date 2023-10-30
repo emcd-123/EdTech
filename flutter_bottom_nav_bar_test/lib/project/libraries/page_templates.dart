@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bottom_nav_bar_test/project/classes/mc_question.dart';
 import 'package:go_router/go_router.dart';
 
 Container templateTitlePage(context, image, text) {
@@ -81,6 +82,26 @@ Container templateWorkInProgress(context) {
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.red)),
             child: const Text("Return to Lessons Page"))
+      ],
+    ),
+  );
+}
+
+Container templateMultipleChoiceQuestion(
+    context, questionNum, totalScore, refresh) {
+  return Container(
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height,
+    color: Colors.white,
+    child: Column(
+      //GET RID OF THIS COLUMN AFTER DEBUGGING I DO NOT LIKE IT
+      children: [
+        MCQuestion(
+          question: questionNum,
+          notifyParent: refresh,
+          totalScore: totalScore,
+        ),
+        Text(totalScore.toString())
       ],
     ),
   );

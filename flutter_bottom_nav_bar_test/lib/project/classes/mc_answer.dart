@@ -4,14 +4,18 @@ import 'package:flutter/material.dart';
 class MCAnswer extends StatelessWidget {
   final String answerText;
   final Color answerColor;
+  final void Function() answerTap;
 
   const MCAnswer(
-      {super.key, required this.answerText, required this.answerColor});
+      {super.key,
+      required this.answerText,
+      required this.answerColor,
+      required this.answerTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: answerTap,
       child: Container(
         padding: const EdgeInsets.all(15),
         margin: const EdgeInsets.all(15),
