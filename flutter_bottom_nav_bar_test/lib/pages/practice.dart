@@ -15,6 +15,7 @@ class PracticeScreen extends StatefulWidget {
 
 class _PracticeScreenState extends State<PracticeScreen> {
   final textController = TextEditingController();
+  int? selectedId;
   final Future<List<Review>> _reviewSchedule =
       DatabaseHelper.instance.getReviewSchedule();
 
@@ -40,21 +41,16 @@ class _PracticeScreenState extends State<PracticeScreen> {
                   builder: (BuildContext context,
                       AsyncSnapshot<List<Review>> snapshot) {
                     if (!snapshot.hasData) {
-                      log('in loading');
-                      log(snapshot.toString());
                       return const Center(
                         child: Text("Loading..."),
                       );
                     } else if (snapshot.data!.isEmpty) {
-                      log("empty data");
-                      log(snapshot as String);
+                      log("data is empty");
                       return const Center(
                         child: Text("No Reviews Today"),
                       );
                     } else {
-                      log("filled data");
                       log(snapshot.data![0].lessonName.toString());
-                      log("but actually tho");
                       // return Center(
                       //     child: Text(snapshot.data![0].lessonName.toString()));
                       return SizedBox(
@@ -62,9 +58,38 @@ class _PracticeScreenState extends State<PracticeScreen> {
                           shrinkWrap: true,
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
-                            return ListTile(
+                            return Card(
+                              // color: selectedId == snapshot.data![index].id
+                              //     ? Colors.white70
+                              //     : Colors.white,
+                              color: snapshot.data![index].nextReview
+                                      .isBefore(DateTime.now())
+                                  ? Colors.orange
+                                  : Colors.blue,
+                              child: ListTile(
                                 title: Text(snapshot.data![index].lessonName
-                                    .toString()));
+                                    .toString()),
+                                onTap: () {
+                                  setState(() {
+                                    if (selectedId == null) {
+                                      textController.text =
+                                          snapshot.data![index].lessonName;
+                                      selectedId = snapshot.data![index].id;
+                                    } else {
+                                      textController.text = '';
+                                      selectedId = null;
+                                    }
+                                  });
+                                },
+                                onLongPress: () {
+                                  setState(() {
+                                    DatabaseHelper.instance
+                                        .remove(snapshot.data![index].id!);
+                                    selectedId = null;
+                                  });
+                                },
+                              ),
+                            );
                           },
                         ),
                       );
@@ -77,13 +102,19 @@ class _PracticeScreenState extends State<PracticeScreen> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.save),
         onPressed: () async {
-          await DatabaseHelper.instance.addReview(Review(
-              lessonName: textController.text,
-              nextReview: "z",
-              reviewStrength: 1));
+          log(selectedId.toString());
+          selectedId != null
+              ? await DatabaseHelper.instance
+                  .updateReviewAddDays(selectedId!, 3)
+              : await DatabaseHelper.instance.addReview(Review(
+                  lessonName: textController.text,
+                  nextReview: DateTime.now(),
+                  reviewStrength: 1));
           setState(() {
             log("state set");
             textController.clear();
+            selectedId = null;
+            log(selectedId.toString());
           });
         },
       ),

@@ -12,7 +12,7 @@ import 'package:path_provider/path_provider.dart';
 class Review {
   final int? id;
   final String lessonName;
-  String nextReview;
+  DateTime nextReview;
   int reviewStrength;
 
   Review(
@@ -24,7 +24,7 @@ class Review {
   factory Review.fromMap(Map<String, dynamic> json) => Review(
         id: json['id'],
         lessonName: json['lessonName'],
-        nextReview: json['nextReview'],
+        nextReview: DateTime.parse(json['nextReview']),
         reviewStrength: json['reviewStrength'],
       );
 
@@ -32,7 +32,7 @@ class Review {
     return {
       'id': id,
       'lessonName': lessonName,
-      'nextReview': nextReview,
+      'nextReview': nextReview.toString(),
       'reviewStrength': reviewStrength,
     };
   }
@@ -72,41 +72,48 @@ class DatabaseHelper {
 
   // Returns all reviews and their times
   Future<List<Review>> getReviewSchedule() async {
-    //TODO: DELETE THIS LATER IT IS ONLY FOR DEBUGGING
-    // Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    // String path = join(documentsDirectory.path, 'spaced_repetition.db');
-    // deleteDatabase(path);
-    log("in review schedule");
     Database db = await instance.database;
-    log("got database instance");
 
-    // TODO: DELETE THIS LATER IT IS HERE FOR DEBUGGING
-    // remove(1);
-
-    log("removed query");
     var lessonsToReview =
         await db.query('review_schedule', orderBy: 'nextReview');
-    log('got lessons query');
     log(lessonsToReview.toString());
     List<Review> reviewList = lessonsToReview.isNotEmpty
         ? lessonsToReview.map((c) => Review.fromMap(c)).toList()
         : [];
-    log('created a review list');
-    // log(reviewList[0].lessonName.toString());
+
     return reviewList;
   }
 
   // Add a new review into the review schedule database
   Future<int> addReview(Review review) async {
-    log("adding a review ");
     Database db = await instance.database;
     return await db.insert('review_schedule', review.toMap());
   }
 
   Future<int> remove(int id) async {
-    log("removing a review");
     Database db = await instance.database;
     return await db.delete('review_schedule', where: 'id=?', whereArgs: [id]);
+  }
+
+  // add these into update review days later
+  int updateReviewStrength(int days, bool passed) {
+    return passed ? (days * (3 / 2)).ceil() : 1;
+  }
+
+  // This function updates the database so that the review with id's nextReview is incremented n number of days
+  Future<int> updateReviewAddDays(int id, int days) async {
+    Database db = await instance.database;
+    var data =
+        await db.query("review_schedule", where: 'id = ?', whereArgs: [id]);
+
+    Review updatedReview = Review.fromMap(data[0]);
+    updatedReview.nextReview =
+        updatedReview.nextReview.add(Duration(days: days));
+    updatedReview.reviewStrength = days;
+    log(updatedReview.toString());
+
+    return await db.update('review_schedule', updatedReview.toMap(),
+        where: 'id = ?', whereArgs: [id]);
   }
 
   // For debugging purposes

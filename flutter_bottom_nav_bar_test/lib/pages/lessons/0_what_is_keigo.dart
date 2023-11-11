@@ -63,8 +63,10 @@ class _LessonWhatIsKeigoState extends State<LessonWhatIsKeigo> {
               templatePageInfo(context, "assets/irasutoya/study_nihongo.png",
                   """This app is designed to help intermediate to advanced level Japanese language learners learn and improve their keigo. The philosophy behind its design is that keigo is made unnecessarily more complicated because of the way it's taught. This app presents keigo in small, bite-sized lessons to avoid overwhelming grammar tables. It then reinforces that learning with context based exercises. These exercises are presented in a way that will help keep these grammar rules within long term memory as well."""),
               templateMultipleChoiceQuestion(context, _questions[0]),
-              templateLessonComplete(context,
-                  "Well Done! You have completed the first step towards mastering keigo!")
+              templateLessonComplete(
+                  context,
+                  "Well Done! You have completed the first step towards mastering keigo!",
+                  0)
             ],
           ),
         ),
