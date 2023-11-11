@@ -87,12 +87,10 @@ class MyShellRouter {
           GoRoute(
               path: '/practice',
               builder: (context, state) {
-                return const PracticeScreen();
+                return PracticeScreen();
               },
               pageBuilder: (context, state) => buildPageWithoutAnimation(
-                  context: context,
-                  state: state,
-                  child: const PracticeScreen())),
+                  context: context, state: state, child: PracticeScreen())),
           GoRoute(
               path: '/chat',
               builder: (context, state) {
