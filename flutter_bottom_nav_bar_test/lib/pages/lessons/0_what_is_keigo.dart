@@ -20,6 +20,7 @@ class _LessonWhatIsKeigoState extends State<LessonWhatIsKeigo> {
   final List<Map<String, Object>> _questions = [
     {
       'question': 'What is Keigo?',
+      'questionType': "multipleChoice",
       'answers': [
         {'answerText': 'A grammar thing', 'score': true},
         {'answerText': 'A food', 'score': false},
@@ -66,7 +67,7 @@ class _LessonWhatIsKeigoState extends State<LessonWhatIsKeigo> {
               templateLessonComplete(
                   context,
                   "Well Done! You have completed the first step towards mastering keigo!",
-                  0)
+                  "what_is_keigo")
             ],
           ),
         ),

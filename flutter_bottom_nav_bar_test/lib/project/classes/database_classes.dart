@@ -87,7 +87,14 @@ class DatabaseHelper {
   // Add a new review into the review schedule database
   Future<int> addReview(Review review) async {
     Database db = await instance.database;
-    return await db.insert('review_schedule', review.toMap());
+    var existingLesson = await db.query('review_schedule',
+        where: 'lessonName == ?', whereArgs: [review.lessonName]);
+    log(existingLesson.toString());
+    if (existingLesson.isEmpty) {
+      return await db.insert('review_schedule', review.toMap());
+    } else {
+      return 0;
+    }
   }
 
   Future<int> remove(int id) async {

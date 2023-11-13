@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/database_classes.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/mc_question.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/providers.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+
+import '../classes/fill_blank_question.dart';
 
 Container templateTitlePage(context, image, text) {
   return Container(
@@ -42,7 +46,7 @@ Container templatePageInfo(context, image, text) {
   );
 }
 
-Container templateLessonComplete(context, text, lessonNum) {
+Container templateLessonComplete(context, text, lessonName) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: MediaQuery.of(context).size.height,
@@ -66,14 +70,15 @@ Container templateLessonComplete(context, text, lessonNum) {
                       scoreKeeperProvider.requiredScore
                   ? () {
                       //TODO: going to need something that prevents adding the review into the database twice
+                      log(scoreKeeperProvider.requiredScore.toString());
+                      log(scoreKeeperProvider.totalScore.toString());
                       DatabaseHelper.instance.addReview(Review(
-                          id: lessonNum,
-                          lessonName: "what_is_keigo",
+                          lessonName: lessonName.toString(),
                           nextReview:
                               DateTime.now().add(const Duration(days: 1)),
                           reviewStrength: 1));
-                      GoRouter.of(context).pop(context);
                       scoreKeeperProvider.clearTotalScore();
+                      GoRouter.of(context).pop(context);
                     }
                   : null,
               style: ButtonStyle(
@@ -125,6 +130,45 @@ Container templateMultipleChoiceQuestion(context, questionNum) {
         //TODO GET RID OF THIS COLUMN AFTER DEBUGGING I DO NOT LIKE IT
         children: [
           MCQuestion(
+            question: questionNum,
+          ),
+          Text(scoreKeeperProvider.totalScore.toString())
+        ],
+      ),
+    ),
+  );
+}
+
+//TODO
+Container templateOpenResponseQuestion(context, questionNum) {
+  return Container(
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height,
+    color: Colors.white,
+    child: Consumer<ScoreKeeperProvider>(
+      builder: (BuildContext context, ScoreKeeperProvider scoreKeeperProvider,
+              Widget? child) =>
+          Column(
+        //TODO GET RID OF THIS COLUMN AFTER DEBUGGING I DO NOT LIKE IT
+        children: [Text(scoreKeeperProvider.totalScore.toString())],
+      ),
+    ),
+  );
+}
+
+//TODO
+Container templateFillInBlankQuestion(context, questionNum) {
+  return Container(
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height,
+    color: Colors.white,
+    child: Consumer<ScoreKeeperProvider>(
+      builder: (BuildContext context, ScoreKeeperProvider scoreKeeperProvider,
+              Widget? child) =>
+          Column(
+        //TODO GET RID OF THIS COLUMN AFTER DEBUGGING I DO NOT LIKE IT
+        children: [
+          FillInBlankQuestion(
             question: questionNum,
           ),
           Text(scoreKeeperProvider.totalScore.toString())

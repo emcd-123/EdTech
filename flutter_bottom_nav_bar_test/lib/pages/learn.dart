@@ -6,7 +6,7 @@ import 'dart:developer' as developer;
 import 'package:go_router/go_router.dart';
 
 class LearnScreen extends StatefulWidget {
-  LearnScreen({super.key});
+  const LearnScreen({super.key});
 
   @override
   State<LearnScreen> createState() => _LearnScreenState();
