@@ -170,8 +170,7 @@ Container templateFillInBlankQuestion(context, questionNum) {
         children: [
           FillInBlankQuestion(
             question: questionNum,
-          ),
-          Text(scoreKeeperProvider.totalScore.toString())
+          )
         ],
       ),
     ),

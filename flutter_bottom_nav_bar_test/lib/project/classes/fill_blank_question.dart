@@ -13,25 +13,76 @@ class FillInBlankQuestion extends StatefulWidget {
   State<FillInBlankQuestion> createState() => _FillInBlankQuestionState();
 }
 
-class _FillInBlankQuestionState extends State<FillInBlankQuestion> {
+class _FillInBlankQuestionState extends State<FillInBlankQuestion>
+    with AutomaticKeepAliveClientMixin<FillInBlankQuestion> {
   final TextEditingController _textEditingController = TextEditingController();
   bool answerWasSelected = false;
+  bool buttonWasPressed = false;
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
-    List<String> splitStatement = widget.question['question']
-        .toString()
-        .replaceAll("___", "_@_")
-        .split("_");
+    super.build(context);
     List<String> answers = widget.question['answers'] as List<String>;
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
+    Iterable<String> splitStatement = widget.question['question']
+        .toString()
+        .replaceAll("___", " @ ")
+        .split(" ")
+        .map((e) => "$e ");
+
+    Iterable<Widget> splitWidget = splitStatement //.where((e) => e == "@ ")
+        .map((e) {
+      if (e != "@ ") {
+        //TODO:1 Probably not the most secure way to do this, so find some other way later
+        return Text(
+          e,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        );
+      }
+      return Form(
+        key: formKey,
+        child: Consumer(
+          builder: (BuildContext context,
+                  ScoreKeeperProvider scoreKeeperProvider, Widget? child) =>
+              TextFormField(
+            decoration: const InputDecoration(
+                constraints: BoxConstraints(maxHeight: 40, maxWidth: 100)),
+            autofocus: true,
+            validator: (value) {
+              if (answerWasSelected == false && answers.contains(value)) {
+                scoreKeeperProvider.addTotalScore();
+                answerWasSelected = true;
+                buttonWasPressed = true;
+                return "Correct";
+              } else if (answerWasSelected == true && answers.contains(value)) {
+                buttonWasPressed = true;
+                return "Correct again";
+              }
+              //TODO: I don't like how this incorrect message is displayed, so change it later
+              buttonWasPressed = true;
+              return "Incorrect";
+            },
+          ),
+        ),
+      );
+    });
+
+    final List<Widget> splitList = splitWidget.toList();
+    log(splitList.toString());
 
     return Consumer<ScoreKeeperProvider>(
       builder: (BuildContext context, ScoreKeeperProvider scoreKeeperProvider,
               Widget? child) =>
           Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
               "Fill in the Blank:",
@@ -42,52 +93,36 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion> {
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2,
+              height: MediaQuery.of(context).size.height / 5,
               child: Center(
-                child: Column(
-                  children: [
-                    Text(
-                      splitStatement[0],
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Form(
-                      key: _formKey,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (answerWasSelected == false &&
-                              answers.contains(value)) {
-                            scoreKeeperProvider.addTotalScore();
-                            answerWasSelected = true;
-                            return "Correct";
-                          } else if (answerWasSelected == true &&
-                              answers.contains(value)) {
-                            return "Correct again";
-                          }
-                          return "Incorrect answer, try again";
-                        },
-                      ),
-                    ),
-                    Text(
-                      splitStatement[2],
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                child: Flexible(
+                  child: Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    alignment: WrapAlignment.start,
+                    spacing: 0,
+                    direction: Axis.horizontal,
+                    children: splitList,
+                  ),
                 ),
               ),
             ),
+            Text(
+              answerWasSelected ? "Well Done!" : "Try Again",
+              style: TextStyle(
+                  color: buttonWasPressed
+                      ? answerWasSelected
+                          ? Colors.green
+                          : Colors.red
+                      : Colors.white),
+            ),
             ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    log(_formKey.currentState!.validate() as String);
-                  }
-                  //_answerWasSelected = true;
-                },
+                //TODO: Deal with the ParentDataWidget error
+                onPressed: answerWasSelected
+                    ? null
+                    : () {
+                        if (formKey.currentState!.validate()) {}
+                        setState(() {});
+                      },
                 child: const Text("Submit"))
           ],
         ),

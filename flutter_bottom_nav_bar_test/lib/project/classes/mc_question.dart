@@ -15,11 +15,18 @@ class MCQuestion extends StatefulWidget {
   State<MCQuestion> createState() => _MCQuestionState();
 }
 
-class _MCQuestionState extends State<MCQuestion> {
+class _MCQuestionState extends State<MCQuestion>
+    with AutomaticKeepAliveClientMixin<MCQuestion> {
   bool answerWasSelected = false;
 
   @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Consumer<ScoreKeeperProvider>(
       builder: (BuildContext context, ScoreKeeperProvider scoreKeeperProvider,
               Widget? child) =>
