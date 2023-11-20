@@ -54,6 +54,7 @@ class _LessonWhyLearnKeigoState extends State<LessonWhyLearnKeigo> {
         ),
         body: Center(
           child: PageView(
+            pageSnapping: true,
             scrollDirection: Axis.horizontal,
             children: [
               templateTitlePage(context, "assets/irasutoya/study_nihongo.png",

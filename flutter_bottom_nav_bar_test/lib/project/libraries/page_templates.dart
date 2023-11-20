@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../classes/fill_blank_question.dart';
+import '../classes/notifications.dart';
 
 Container templateTitlePage(context, image, text) {
   return Container(
@@ -72,11 +73,35 @@ Container templateLessonComplete(context, text, lessonName) {
                       //TODO: going to need something that prevents adding the review into the database twice
                       log(scoreKeeperProvider.requiredScore.toString());
                       log(scoreKeeperProvider.totalScore.toString());
-                      DatabaseHelper.instance.addReview(Review(
-                          lessonName: lessonName.toString(),
-                          nextReview:
-                              DateTime.now().add(const Duration(days: 1)),
-                          reviewStrength: 1));
+
+                      // This section adds a new review entry into the sql database
+                      DatabaseHelper.instance
+                          .addReview(Review(
+                              lessonName: lessonName.toString(),
+                              nextReview:
+                                  DateTime.now().add(const Duration(days: 1)),
+                              reviewStrength: 1))
+                          .then((value) {
+                        // this one will display a notification in 24 hours once the lesson in complete
+                        // TODO: add a provider that will keep track of notifications so that they only get sent once every 24 hours in order to not be annoying
+                        log(value.toString());
+                        if (value != -1) {
+                          NotificationService.showNotification(
+                              title: "Time to Practice! (1 hour test)",
+                              body: "Click here to improve your Japanese",
+                              scheduled: true,
+                              interval: 3600);
+                        }
+                      });
+                      // if (alreadyExists != 0) {
+                      //   NotificationService.showNotification(
+                      //       // title: "Time to Practice!",
+                      //       // body: "Click here to improve your Japanese",
+                      //       title: "Testing the 24 hour notification sending",
+                      //       body: "How did it work?",
+                      //       scheduled: true,
+                      //       interval: 86400);
+                      // }
                       scoreKeeperProvider.clearTotalScore();
                       GoRouter.of(context).pop(context);
                     }

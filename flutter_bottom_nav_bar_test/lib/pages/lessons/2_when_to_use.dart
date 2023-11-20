@@ -54,6 +54,7 @@ class _LessonWhenToUseState extends State<LessonWhenToUse> {
               ),
               body: Center(
                 child: PageView(
+                  pageSnapping: true,
                   scrollDirection: Axis.horizontal,
                   children: [
                     templateTitlePage(

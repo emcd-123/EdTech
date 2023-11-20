@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/lesson_list.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:developer' as developer;
 
 import 'package:go_router/go_router.dart';
 
@@ -19,10 +18,10 @@ class _LearnScreenState extends State<LearnScreen> {
     lessons = LessonList.getLessonList();
   }
 
-  @override
-  void initState() {
-    _getLessons();
-  }
+  // @override
+  // void initState() {
+  //   _getLessons();
+  // }
 
   @override
   Widget build(BuildContext context) {

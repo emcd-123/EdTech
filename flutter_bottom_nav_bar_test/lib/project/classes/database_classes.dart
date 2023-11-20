@@ -93,7 +93,7 @@ class DatabaseHelper {
     if (existingLesson.isEmpty) {
       return await db.insert('review_schedule', review.toMap());
     } else {
-      return 0;
+      return -1;
     }
   }
 

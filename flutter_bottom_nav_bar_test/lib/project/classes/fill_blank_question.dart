@@ -56,6 +56,7 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion>
                 constraints: BoxConstraints(maxHeight: 40, maxWidth: 100)),
             autofocus: true,
             validator: (value) {
+              value = value!.toLowerCase().trim();
               if (answerWasSelected == false && answers.contains(value)) {
                 scoreKeeperProvider.addTotalScore();
                 answerWasSelected = true;
