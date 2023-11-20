@@ -36,6 +36,11 @@ class LessonList {
         lessonPath: "/levels_of_respect"));
 
     lessons.add(LessonList(
+        topic: "Nouns",
+        iconPath: "assets/svg/bento.svg",
+        lessonPath: "/meishi"));
+
+    lessons.add(LessonList(
         topic: "To Be: だ",
         iconPath: "assets/svg/ninja.svg",
         lessonPath: "/copula"));
@@ -147,11 +152,6 @@ class LessonList {
         topic: "Other Verbs",
         iconPath: "assets/svg/bento.svg",
         lessonPath: "/nado"));
-
-    lessons.add(LessonList(
-        topic: "Nouns",
-        iconPath: "assets/svg/bento.svg",
-        lessonPath: "/meishi"));
 
     lessons.add(
       LessonList(

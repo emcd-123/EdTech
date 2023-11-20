@@ -1,4 +1,5 @@
 import 'package:flutter_bottom_nav_bar_test/pages/chat.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/database.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/learn.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/0_what_is_keigo.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/11_motte.dart';
@@ -15,7 +16,7 @@ import 'package:flutter_bottom_nav_bar_test/pages/lessons/21_sumu.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/22_neru.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/23_shinu.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/24_nado.dart';
-import 'package:flutter_bottom_nav_bar_test/pages/lessons/25_meishi.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/3_5_meishi.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/26_jin.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/27_toshi.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/28_sama.dart';
@@ -29,7 +30,7 @@ import 'package:flutter_bottom_nav_bar_test/pages/lessons/35_sakujitsu.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/36_sakihodo.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/37_totemo.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/38_summary.dart';
-import 'package:flutter_bottom_nav_bar_test/pages/lessons/3_levels_of_respect.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/lessons/3_5_levels_of_respect.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/4_copula.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/5_taberu_nomu.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/6_iru_teiru.dart';
@@ -45,6 +46,7 @@ import 'package:flutter_bottom_nav_bar_test/main.dart';
 
 import '../../pages/lessons/1_why_learn_keigo.dart';
 import '../../pages/lessons/2_when_to_use.dart';
+import '../../pages/practice_lesson.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: "root");
@@ -87,12 +89,10 @@ class MyShellRouter {
           GoRoute(
               path: '/practice',
               builder: (context, state) {
-                return const PracticeScreen();
+                return PracticeScreen();
               },
               pageBuilder: (context, state) => buildPageWithoutAnimation(
-                  context: context,
-                  state: state,
-                  child: const PracticeScreen())),
+                  context: context, state: state, child: PracticeScreen())),
           GoRoute(
               path: '/chat',
               builder: (context, state) {
@@ -102,6 +102,19 @@ class MyShellRouter {
                   context: context, state: state, child: const ChatScreen()))
         ],
       ),
+      GoRoute(
+        path: '/practice_lesson',
+        builder: (context, state) {
+          return const LessonPractice();
+        },
+      ),
+      GoRoute(
+        path: '/database',
+        builder: (context, state) {
+          return const DatabaseScreen();
+        },
+      ),
+      // Lesson Routes
       GoRoute(
         path: '/what_is_keigo',
         builder: (context, state) {

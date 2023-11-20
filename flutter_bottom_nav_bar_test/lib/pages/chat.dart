@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bottom_nav_bar_test/project/classes/notifications.dart';
+import 'package:go_router/go_router.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -7,10 +9,37 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Keigo Dojo")),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: <Widget>[Text("Chat Screen")],
+          children: <Widget>[
+            const Text(
+                "Chat Screen: Currently using to test notifications and sqlite database"),
+            ElevatedButton(
+              onPressed: () async {
+                await NotificationService.showNotification(
+                    title: "Time to Practice!",
+                    body: "Click here to improve your Japanese");
+              },
+              child: const Text("Using this to test notification sending"),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await NotificationService.showNotification(
+                    title: "Scheduled notification",
+                    body: "Your Daily Practice Time has Arrived",
+                    scheduled: true,
+                    interval: 120);
+              },
+              child: const Text("Test out a scheduled notification"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                GoRouter.of(context).push("/database");
+              },
+              child: const Text("Open Database View Screen"),
+            ),
+          ],
         ),
       ),
     );

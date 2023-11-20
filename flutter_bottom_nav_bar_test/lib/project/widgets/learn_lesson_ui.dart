@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class MyWidget extends StatelessWidget {
-  final String lesson_name;
-  final String lesson_path;
-  final String lesson_image;
+  final String lessonName;
+  final String lessonPath;
+  final String lessonImage;
 
   const MyWidget(
       {super.key,
-      required this.lesson_name,
-      required this.lesson_path,
-      required this.lesson_image});
+      required this.lessonName,
+      required this.lessonPath,
+      required this.lessonImage});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class MyWidget extends StatelessWidget {
           elevation: 10,
           child: InkWell(
             onTap: () {},
-            child: Container(height: 60, width: 220),
+            child: const SizedBox(height: 60, width: 220),
           )),
     );
   }
