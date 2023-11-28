@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/database_classes.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/mc_question.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/providers.dart';
+import 'package:just_the_tooltip/just_the_tooltip.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -29,22 +30,76 @@ Container templateTitlePage(context, image, text) {
   );
 }
 
-Container templatePageInfo(context, image, text) {
-  return Container(
-    width: MediaQuery.of(context).size.width,
-    height: MediaQuery.of(context).size.height,
-    color: Colors.white,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Image(image: AssetImage(image)),
-        Container(
-          padding: const EdgeInsets.only(left: 15, right: 15),
-          child: Text(text),
-        )
-      ],
-    ),
-  );
+Container templatePageInfo(context, image, text, {String tooltip = ""}) {
+  if (tooltip != "") {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Image(image: AssetImage(image)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              JustTheTooltip(
+                content: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    tooltip,
+                  ),
+                ),
+                child: Material(
+                  color: Colors.grey.shade800,
+                  shape: const CircleBorder(),
+                  elevation: 4.0,
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.tips_and_updates_outlined,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              )
+              // Tooltip(
+              //   message: "This is a tooltip",
+              //   showDuration: const Duration(seconds: 1),
+              //   waitDuration: const Duration(seconds: 9),
+              //   preferBelow: false,
+              //   child: IconButton(
+              //     onPressed: () {},
+              //     icon: const Icon(Icons.tips_and_updates_outlined),
+              //     //tooltip: "Testing tooltip",
+              //   ),
+              // ),
+            ],
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: Text(text),
+          )
+        ],
+      ),
+    );
+  } else {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Image(image: AssetImage(image)),
+          Container(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: Text(text),
+          )
+        ],
+      ),
+    );
+  }
 }
 
 Container templateLessonComplete(context, text, lessonName) {

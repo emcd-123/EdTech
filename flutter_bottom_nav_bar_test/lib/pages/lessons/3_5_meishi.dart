@@ -76,7 +76,9 @@ class _LessonMeishiState extends State<LessonMeishi> {
             templatePageInfo(context, "assets/irasutoya/study_nihongo.png",
                 "Some words will almost always appear with their prefix. For example, the word for meal, ご飯, almost always has the ご in front of it."),
             templatePageInfo(context, "assets/irasutoya/study_nihongo.png",
-                "So how do you know whether to add a お or ご prefix? It depends on the etymology of the word. If the word uses 訓読み (くんよみ), also known as the Japanese reading, it will have an お as a prefix. Words with 訓読み readings that use お include お酒, お茶, お仕事 and お寿司. If the word uses 音読み (おんよみ), also known as the Chinese reading, it will use ご as a prefix. Words that use ご as a prefix include ご両親, ご家族, and ご協力. There is also a tendency for everyday items and foods to use お as a prefix and for more abstract concepts to use ご."),
+                "So how do you know whether to add a お or ご prefix? It depends on the etymology of the word. If the word uses 訓読み (くんよみ), also known as the Japanese reading, it will have an お as a prefix. Words with 訓読み readings that use お include お酒, お茶, お仕事 and お寿司. If the word uses 音読み (おんよみ), also known as the Chinese reading, it will use ご as a prefix. Words that use ご as a prefix include ご両親, ご家族, and ご協力.",
+                tooltip:
+                    "There is also a tendency for everyday items and foods to use お as a prefix and for more abstract concepts to use ご."),
             templateFillInBlankQuestion(context, _questions[0]),
             templateFillInBlankQuestion(context, _questions[1]),
             templateFillInBlankQuestion(context, _questions[2]),
