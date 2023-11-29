@@ -30,7 +30,13 @@ Container templateTitlePage(context, image, text) {
   );
 }
 
-Container templatePageInfo(context, image, text, {String tooltip = ""}) {
+Container templatePageInfo(
+  context,
+  image,
+  text, {
+  String tooltip = "",
+  //int textSize
+}) {
   if (tooltip != "") {
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -40,46 +46,46 @@ Container templatePageInfo(context, image, text, {String tooltip = ""}) {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Image(image: AssetImage(image)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              JustTheTooltip(
-                content: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    tooltip,
-                  ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    JustTheTooltip(
+                      preferredDirection: AxisDirection.up,
+                      elevation: 8,
+                      isModal: true,
+                      content: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          tooltip,
+                        ),
+                      ),
+                      child: const Material(
+                        color: Colors.yellowAccent,
+                        shape: CircleBorder(),
+                        elevation: 4.0,
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.tips_and_updates_outlined,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                child: Material(
-                  color: Colors.grey.shade800,
-                  shape: const CircleBorder(),
-                  elevation: 4.0,
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.tips_and_updates_outlined,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Text(text),
               )
-              // Tooltip(
-              //   message: "This is a tooltip",
-              //   showDuration: const Duration(seconds: 1),
-              //   waitDuration: const Duration(seconds: 9),
-              //   preferBelow: false,
-              //   child: IconButton(
-              //     onPressed: () {},
-              //     icon: const Icon(Icons.tips_and_updates_outlined),
-              //     //tooltip: "Testing tooltip",
-              //   ),
-              // ),
             ],
           ),
-          Container(
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            child: Text(text),
-          )
         ],
       ),
     );
@@ -125,10 +131,6 @@ Container templateLessonComplete(context, text, lessonName) {
               onPressed: scoreKeeperProvider.totalScore ==
                       scoreKeeperProvider.requiredScore
                   ? () {
-                      //TODO: going to need something that prevents adding the review into the database twice
-                      log(scoreKeeperProvider.requiredScore.toString());
-                      log(scoreKeeperProvider.totalScore.toString());
-
                       // This section adds a new review entry into the sql database
                       DatabaseHelper.instance
                           .addReview(Review(
