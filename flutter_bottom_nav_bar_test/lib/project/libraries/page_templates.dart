@@ -71,7 +71,7 @@ Container templatePageInfo(
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Icon(
-                            Icons.tips_and_updates_outlined,
+                            Icons.lightbulb_outline,
                             color: Colors.black,
                           ),
                         ),
@@ -239,7 +239,8 @@ Container templateOpenResponseQuestion(context, questionNum) {
 }
 
 //TODO
-Container templateFillInBlankQuestion(context, questionNum) {
+Container templateFillInBlankQuestion(context, questionNum,
+    {String reviewOrExtra = ""}) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: MediaQuery.of(context).size.height,
@@ -252,6 +253,7 @@ Container templateFillInBlankQuestion(context, questionNum) {
         children: [
           FillInBlankQuestion(
             question: questionNum,
+            reviewOrExtra: reviewOrExtra,
           )
         ],
       ),

@@ -19,27 +19,43 @@ class PracticeScreen extends StatefulWidget {
 class _PracticeScreenState extends State<PracticeScreen> {
   final textController = TextEditingController();
   int? selectedId;
-  final Future<List<Review>> _reviewSchedule =
-      DatabaseHelper.instance.getReviewSchedule();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text("Keigo Dojo")),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const Text(
-                  'The lessons generated right now are not connected to the spaced repetition system, but they will be'),
-              ElevatedButton(
-                onPressed: () {
-                  GoRouter.of(context).push('/practice_lesson');
-                  log(exercises['meishi']![0].toString());
-                },
-                child: const Text("Start Practice Session"),
-              ),
-            ],
+          child: FutureBuilder(
+            future: DatabaseHelper.instance.getReviewsDue(),
+            builder:
+                (BuildContext context, AsyncSnapshot<List<Review>> snapshot) {
+              //Reviews due text
+              String howManyReviewsText;
+              List<Review>? reviewList = snapshot.data;
+
+              if (reviewList.toString() == '[]') {
+                howManyReviewsText =
+                    "No reviews due now. Would you like to do extra practice?";
+              } else {
+                int? numberOfReviews = reviewList?.length;
+
+                howManyReviewsText =
+                    "You have $numberOfReviews lessons to review. Click the button to get started!";
+              }
+
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(howManyReviewsText),
+                  ElevatedButton(
+                    onPressed: () {
+                      GoRouter.of(context).push('/practice_lesson');
+                    },
+                    child: const Text("Start Practice Session"),
+                  ),
+                ],
+              );
+            },
           ),
         ));
   }

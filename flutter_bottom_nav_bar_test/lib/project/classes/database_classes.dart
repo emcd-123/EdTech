@@ -84,6 +84,21 @@ class DatabaseHelper {
     return reviewList;
   }
 
+  Future<List<Review>> getReviewsDue() async {
+    Database db = await instance.database;
+
+    var lessonsToReview = await db.query('review_schedule',
+        orderBy: 'nextReview',
+        where: "nextReview < ?",
+        whereArgs: [DateTime.now().toString()]);
+    log(lessonsToReview.toString());
+    List<Review> reviewList = lessonsToReview.isNotEmpty
+        ? lessonsToReview.map((c) => Review.fromMap(c)).toList()
+        : [];
+
+    return reviewList;
+  }
+
   // Add a new review into the review schedule database
   Future<int> addReview(Review review) async {
     Database db = await instance.database;

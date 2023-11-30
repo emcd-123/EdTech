@@ -1,4 +1,11 @@
 final Map<String, List<Map<String, Object>>> exercises = {
+  'levels_of_respect': [
+    {
+      'question': 'Use this keigo for talking about yourself: ___.',
+      'questionType': "fillInTheBlank",
+      'answers': ['謙譲語', 'けんじょうご', 'kenjougo'],
+    },
+  ],
   'meishi': [
     {
       'question': 'Fill in the correct prefix: ___水.',

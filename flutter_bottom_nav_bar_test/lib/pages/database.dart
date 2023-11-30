@@ -16,8 +16,8 @@ class DatabaseScreen extends StatefulWidget {
 class _DatabaseScreenState extends State<DatabaseScreen> {
   final textController = TextEditingController();
   int? selectedId;
-  final Future<List<Review>> _reviewSchedule =
-      DatabaseHelper.instance.getReviewSchedule();
+  // final Future<List<Review>> _reviewSchedule =
+  //     DatabaseHelper.instance.getReviewSchedule();
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +38,7 @@ class _DatabaseScreenState extends State<DatabaseScreen> {
               child: FutureBuilder<List<Review>>(
                   future: DatabaseHelper.instance
                       .getReviewSchedule(), //_reviewSchedule,
+                  //TODO: CHANGE THIS BACK
                   builder: (BuildContext context,
                       AsyncSnapshot<List<Review>> snapshot) {
                     if (!snapshot.hasData) {
@@ -111,10 +112,8 @@ class _DatabaseScreenState extends State<DatabaseScreen> {
                   nextReview: DateTime.now(),
                   reviewStrength: 1));
           setState(() {
-            log("state set");
             textController.clear();
             selectedId = null;
-            log(selectedId.toString());
           });
         },
       ),
