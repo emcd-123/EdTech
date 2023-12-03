@@ -1,4 +1,12 @@
 final Map<String, List<Map<String, Object>>> exercises = {
+  'what_is_keigo': [
+    {
+      'question':
+          'The aspect of Japanese grammar that conveys respect is called: ___.',
+      'questionType': "fillInTheBlank",
+      'answers': ['敬語', 'けいご', 'keigo'],
+    },
+  ],
   'levels_of_respect': [
     {
       'question': 'Use this keigo for talking about yourself: ___.',

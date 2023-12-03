@@ -118,21 +118,42 @@ class DatabaseHelper {
   }
 
   // add these into update review days later
-  int updateReviewStrength(int days, bool passed) {
-    return passed ? (days * (3 / 2)).ceil() : 1;
-  }
+  // int updateReviewStrength(int days, bool passed) {
+  //   return passed ? (days * (3 / 2)).ceil() : 1;
+  // }
 
   // This function updates the database so that the review with id's nextReview is incremented n number of days
-  Future<int> updateReviewAddDays(int id, int days) async {
+  Future<int> updateReviewAddDays(String lessonName, bool passed) async {
     Database db = await instance.database;
-    var data =
-        await db.query("review_schedule", where: 'id = ?', whereArgs: [id]);
+    var data = await db.query("review_schedule",
+        where: 'lessonName = ?', whereArgs: [lessonName]);
 
     Review updatedReview = Review.fromMap(data[0]);
+    int days = updatedReview.reviewStrength;
+    days = passed ? (days * (3 / 2)).ceil() : 1;
+
+    updatedReview.nextReview = DateTime.now().add(Duration(days: days));
+    updatedReview.reviewStrength = days;
+    log("HERE IS THE UPDATED REVIEW");
+    log(updatedReview.nextReview.toString());
+
+    return await db.update('review_schedule', updatedReview.toMap(),
+        where: 'lessonName = ?', whereArgs: [lessonName]);
+  }
+
+  Future<int> updateReviewAddDaysById(int id, int days) async {
+    Database db = await instance.database;
+    var data = await db
+        .query("review_schedule", where: 'lessonName = ?', whereArgs: [id]);
+
+    Review updatedReview = Review.fromMap(data[0]);
+
     updatedReview.nextReview =
         updatedReview.nextReview.add(Duration(days: days));
+    log(updatedReview.nextReview as String);
     updatedReview.reviewStrength = days;
-    log(updatedReview.toString());
+    log("HERE IS THE UPDATED REVIEW");
+    log(updatedReview.nextReview.toString());
 
     return await db.update('review_schedule', updatedReview.toMap(),
         where: 'id = ?', whereArgs: [id]);

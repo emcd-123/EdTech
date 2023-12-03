@@ -106,7 +106,7 @@ class _DatabaseScreenState extends State<DatabaseScreen> {
           log(selectedId.toString());
           selectedId != null
               ? await DatabaseHelper.instance
-                  .updateReviewAddDays(selectedId!, 3)
+                  .updateReviewAddDaysById(selectedId!, 3)
               : await DatabaseHelper.instance.addReview(Review(
                   lessonName: textController.text,
                   nextReview: DateTime.now(),

@@ -240,7 +240,7 @@ Container templateOpenResponseQuestion(context, questionNum) {
 
 //TODO
 Container templateFillInBlankQuestion(context, questionNum,
-    {String reviewOrExtra = ""}) {
+    {String reviewOrExtra = "", String lessonName = ""}) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: MediaQuery.of(context).size.height,
@@ -252,9 +252,9 @@ Container templateFillInBlankQuestion(context, questionNum,
         //TODO GET RID OF THIS COLUMN AFTER DEBUGGING I DO NOT LIKE IT
         children: [
           FillInBlankQuestion(
-            question: questionNum,
-            reviewOrExtra: reviewOrExtra,
-          )
+              question: questionNum,
+              reviewOrExtra: reviewOrExtra,
+              lessonName: lessonName)
         ],
       ),
     ),

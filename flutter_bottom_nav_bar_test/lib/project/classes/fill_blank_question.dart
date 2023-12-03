@@ -4,12 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/providers.dart';
 import 'package:provider/provider.dart';
 
+import 'database_classes.dart';
+
 class FillInBlankQuestion extends StatefulWidget {
   Map<String, Object> question;
   String reviewOrExtra;
+  String lessonName;
 
   FillInBlankQuestion(
-      {super.key, required this.question, required this.reviewOrExtra});
+      {super.key,
+      required this.question,
+      required this.reviewOrExtra,
+      required this.lessonName});
 
   @override
   State<FillInBlankQuestion> createState() => _FillInBlankQuestionState();
@@ -19,8 +25,10 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion>
     with AutomaticKeepAliveClientMixin<FillInBlankQuestion> {
   final TextEditingController _textEditingController = TextEditingController();
 
-  bool answerWasSelected = false;
+  bool correctAnswerWasSelected = false;
   bool buttonWasPressed = false;
+  bool wasSRSUpdated = false;
+  DatabaseHelper db = DatabaseHelper.instance;
 
   @override
   // TODO: implement wantKeepAlive
@@ -59,22 +67,57 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion>
             autofocus: true,
             validator: (value) {
               value = value!.toLowerCase().trim();
-              if (answerWasSelected == false && answers.contains(value)) {
+              if (correctAnswerWasSelected == false &&
+                  answers.contains(value)) {
                 scoreKeeperProvider.addTotalScore();
-                answerWasSelected = true;
+                correctAnswerWasSelected = true;
                 buttonWasPressed = true;
+                log("correct answer selected and button pressed");
+                if (wasSRSUpdated == false) {
+                  db.updateReviewAddDays(
+                    widget.lessonName,
+                    true,
+                  );
+                  wasSRSUpdated = true;
+                }
 
                 return "Correct";
-              } else if (answerWasSelected == true && answers.contains(value)) {
+              } else if (correctAnswerWasSelected == true &&
+                  answers.contains(value)) {
                 buttonWasPressed = true;
+                log("button was already pressed but answer is still correct");
+                if (wasSRSUpdated == false) {
+                  db.updateReviewAddDays(
+                    widget.lessonName,
+                    true,
+                  );
+                  wasSRSUpdated = true;
+                }
+
                 return "Correct again";
-              } else if (answerWasSelected == true &&
+              } else if (correctAnswerWasSelected == true &&
                   !answers.contains(value)) {
-                answerWasSelected = false;
+                correctAnswerWasSelected = false;
+                log("incorrect answer chosen");
+                if (wasSRSUpdated == false) {
+                  db.updateReviewAddDays(
+                    widget.lessonName,
+                    false,
+                  );
+                  wasSRSUpdated = true;
+                }
                 return "Incorrect";
               }
               //TODO: I don't like how this incorrect message is displayed, so change it later
               buttonWasPressed = true;
+              if (wasSRSUpdated == false) {
+                db.updateReviewAddDays(
+                  widget.lessonName,
+                  false,
+                );
+                wasSRSUpdated = true;
+              }
+              log("incorrect answer");
               return "Incorrect";
             },
           ),
@@ -115,10 +158,10 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion>
                 ),
               ),
               Text(
-                answerWasSelected ? "Well Done!" : "Try Again",
+                correctAnswerWasSelected ? "Well Done!" : "Try Again",
                 style: TextStyle(
                     color: buttonWasPressed
-                        ? answerWasSelected
+                        ? correctAnswerWasSelected
                             ? Colors.green
                             : Colors.red
                         : Colors.white),
@@ -166,17 +209,17 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion>
                 ),
               ),
               Text(
-                answerWasSelected ? "Well Done!" : "Try Again",
+                correctAnswerWasSelected ? "Well Done!" : "Try Again",
                 style: TextStyle(
                     color: buttonWasPressed
-                        ? answerWasSelected
+                        ? correctAnswerWasSelected
                             ? Colors.green
                             : Colors.red
                         : Colors.white),
               ),
               ElevatedButton(
                   //TODO: Deal with the ParentDataWidget error
-                  onPressed: answerWasSelected
+                  onPressed: correctAnswerWasSelected
                       ? null
                       : () {
                           if (formKey.currentState!.validate()) {}

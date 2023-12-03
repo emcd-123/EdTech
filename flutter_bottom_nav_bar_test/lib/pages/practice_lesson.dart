@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,15 +29,15 @@ class _LessonPracticeState extends State<LessonPractice> {
     Provider.of<ScoreKeeperProvider>(context, listen: false)
         .initializeReqScore(100);
 
-    return Consumer<ScoreKeeperProvider>(builder: (BuildContext context,
-        ScoreKeeperProvider scoreKeeperProvider, Widget? child) {
+    return Consumer<MyPracticeReviewsProvider>(builder: (BuildContext context,
+        MyPracticeReviewsProvider myPracticeReviewsProvider, Widget? child) {
       return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
           leading: IconButton(
             onPressed: () {
               GoRouter.of(context).pop(context);
-              scoreKeeperProvider.clearTotalScore();
+              myPracticeReviewsProvider.clear();
             },
             icon: const Icon(Icons.clear_rounded),
           ),
@@ -45,7 +46,6 @@ class _LessonPracticeState extends State<LessonPractice> {
           child: FutureBuilder(
             future: _reviewSchedule,
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              List<Container> children;
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasData) {
@@ -60,48 +60,18 @@ class _LessonPracticeState extends State<LessonPractice> {
                   // I think that this is running to problem because it is rebuilding the list each time and the list is not actually getting any smaller
                   // maybe declare an empty list outside and then have an if statement so that if it is empty then fill it, else display the lessons
                   // could even have a boolean that says nice job or something once you have complete all the lessons
-                  while (reviewData.isNotEmpty) {
-                    //grab the review
-                    int randomIndex = Random().nextInt(reviewData.length);
-                    Review review = reviewData[randomIndex];
 
-                    //remove the review from the review list
-                    // reviewData.remove(review);
+                  myPracticeReviewsProvider.setReviews(reviewData);
 
-                    //find a random exercise
-                    String exercise_index = review.lessonName;
-                    int which_exercise =
-                        Random().nextInt(exercises[exercise_index]!.length);
-
-                    //create the page for it
-                    return templateFillInBlankQuestion(
-                        context, exercises[exercise_index]![which_exercise],
-                        reviewOrExtra: "r");
-                  }
-
-                  return Text(reviewData.toString());
+                  dev.log("made it here");
+                  return PageView(
+                    pageSnapping: true,
+                    scrollDirection: Axis.horizontal,
+                    children: myPracticeReviewsProvider.getLessons(context),
+                  );
                 }
               } else {
-                return PageView(
-                  pageSnapping: true,
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    templateFillInBlankQuestion(
-                        context, exercises['meishi']![0]),
-                    templateFillInBlankQuestion(
-                        context, exercises['meishi']![3]),
-                    templateFillInBlankQuestion(
-                        context, exercises['taberu_nomu']![0]),
-                    templateFillInBlankQuestion(
-                        context, exercises['taberu_nomu']![1]),
-                    templateFillInBlankQuestion(
-                        context, exercises['taberu_nomu']![7]),
-                    templateLessonComplete(
-                        context,
-                        "Well Done! You have completed the first step towards mastering keigo!",
-                        "what_is_keigo")
-                  ],
-                );
+                return const Text("Error");
               }
             },
           ),

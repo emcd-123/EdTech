@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => ScoreKeeperProvider())
+        ChangeNotifierProvider(create: (context) => ScoreKeeperProvider()),
+        ChangeNotifierProvider(create: (context) => MyPracticeReviewsProvider())
       ],
       child: MaterialApp.router(
         title: "Keigo Dojo",
