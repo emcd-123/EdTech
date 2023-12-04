@@ -49,7 +49,7 @@ class MyPracticeReviewsProvider extends ChangeNotifier {
 
   //
   List<Container> getLessons(context) {
-    dev.log(myPracticeReviews[0].lessonName);
+    // dev.log(myPracticeReviews[0].lessonName);
     List<Container> practiceLessons = [];
 
     for (int i = 0; i < myPracticeReviews.length; i++) {
@@ -58,9 +58,19 @@ class MyPracticeReviewsProvider extends ChangeNotifier {
       int whichExercise = Random().nextInt(exercises[exerciseIndex]!.length);
       if (exercises[exerciseIndex]![whichExercise]["questionType"] ==
           "fillInTheBlank") {
-        practiceLessons.add(templateFillInBlankQuestion(
-            context, exercises[exerciseIndex]![whichExercise],
-            reviewOrExtra: "r", lessonName: currentReview.lessonName));
+        String img =
+            exercises[exerciseIndex]![whichExercise]['image'] as String;
+        if (img != "") {
+          practiceLessons.add(templateFillInBlankQuestion(
+              context, exercises[exerciseIndex]![whichExercise],
+              reviewOrExtra: "r",
+              lessonName: currentReview.lessonName,
+              image: img));
+        } else {
+          practiceLessons.add(templateFillInBlankQuestion(
+              context, exercises[exerciseIndex]![whichExercise],
+              reviewOrExtra: "r", lessonName: currentReview.lessonName));
+        }
       } else {
         practiceLessons.add(Container(
             child: const Text("Error: question type unaccounted for")));

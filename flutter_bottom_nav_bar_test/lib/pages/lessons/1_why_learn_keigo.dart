@@ -15,7 +15,7 @@ class LessonWhyLearnKeigo extends StatefulWidget {
 class _LessonWhyLearnKeigoState extends State<LessonWhyLearnKeigo> {
   final List<Map<String, Object>> _questions = [
     {
-      'question': 'Why should you learn keigo (choose multiple)?',
+      'question': 'Why should you learn keigo? (choose multiple)',
       'questionType': "multipleChoice",
       'answers': [
         {
@@ -57,15 +57,21 @@ class _LessonWhyLearnKeigoState extends State<LessonWhyLearnKeigo> {
             pageSnapping: true,
             scrollDirection: Axis.horizontal,
             children: [
-              templateTitlePage(context, "assets/irasutoya/study_nihongo.png",
+              templateTitlePage(
+                  context,
+                  "assets/irasutoya/internet_school_e-learning_man.png",
                   "Why Learn Keigo?"),
-              templatePageInfo(context, "assets/irasutoya/study_nihongo.png",
+              templatePageInfo(
+                  context,
+                  "assets/irasutoya/study_wakaranai_girl.png",
                   "Japanese is a very difficult language to learn for many non-native speakers. One of the things that makes it difficult is keigo. Because of the extra formality, many people, including Japanese native speakers, have questioned whether it is worth it to learn keigo."),
-              templatePageInfo(context, "assets/irasutoya/study_nihongo.png",
+              templatePageInfo(context, "assets/irasutoya/school_bunkasai.png",
                   "Despite this difficulty, there are two major reasons that Japanese learners will benefit from learning keigo: cultural understanding and listening comprehension."),
-              templatePageInfo(context, "assets/irasutoya/study_nihongo.png",
+              templatePageInfo(
+                  context,
+                  "assets/irasutoya/shichigosan_torii.png",
                   "Keigo is a deeply routed part of Japanese culture. Since it is so connected to the values of Japanese society, understanding keigo will give you a deeper understanding of the cultural values and norms of the Japanese people. Consequently, this will help you adapt to the culture and immerse yourself in the language faster."),
-              templatePageInfo(context, "assets/irasutoya/study_nihongo.png",
+              templatePageInfo(context, "assets/irasutoya/music_kids.png",
                   "The second reason that non-native speakers will benefit from learning keigo is listening comprehension. Improving your understanding of keigo will help you understand what Japanese speakers are saying when they use it."),
               templateMultipleChoiceQuestion(context, _questions[0]),
               templateLessonComplete(context, "Great Job!", "why_learn_keigo"),

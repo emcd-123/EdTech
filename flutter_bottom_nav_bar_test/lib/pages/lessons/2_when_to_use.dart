@@ -59,35 +59,33 @@ class _LessonWhenToUseState extends State<LessonWhenToUse> {
                   children: [
                     templateTitlePage(
                         context,
-                        "assets/irasutoya/study_nihongo.png",
+                        "assets/irasutoya/business_man.png",
                         "When is Keigo used?"),
                     templatePageInfo(
                         context,
-                        "assets/irasutoya/study_nihongo.png",
-                        "Before diving into the nuances of Keigo, it is important to first discuss when it is used. There are some situations where you will use Keigo and other situations where it is better to use casual forms, also known as タメ口 or タメ語."),
+                        "assets/irasutoya/kangaeruhito.png",
+                        "Before diving into the nuances of Keigo, it is important to first discuss when it is used. There are some situations where you will use Keigo and other situations where it is better to use casual form, タメ語 (tamego).",
+                        tooltip:
+                            "タメ語 (tamego) is also known as タメ口 (tameguchi) in Japanese. It is also sometimes called the plain form or dictionary form in English."),
                     templatePageInfo(
                         context,
-                        "assets/irasutoya/study_nihongo.png",
-                        "There are many factors to consider when deciding which form to use, but the two most important factors to consider are who you are talking to and the context you are in."),
+                        "assets/irasutoya/wakaranai_man.png",
+                        "There are many factors to consider when deciding which form to use, but the two most important factors to consider are who you are talking to and the context you are in.",
+                        tooltip:
+                            "There is also a concept called 内／外 (uchi/soto) that affects which form you use, and this will be explained in further detail later."),
                     templatePageInfo(
                         context,
-                        "assets/irasutoya/study_nihongo.png",
-                        "As for who you are talking to, it depends on how close of a relationship you have to them. With family and friends, you will usually use casual language. People that you are meeting for the first time, teachers, and coworkers are all different people that you would use some form of keigo with"),
-                    templatePageInfo(
-                        context,
-                        "assets/irasutoya/study_nihongo.png",
+                        "assets/irasutoya/yoroshiku_casual.png",
+                        "As for who you are talking to, it depends on how close of a relationship you have to them. With family and friends, you will usually use casual language. People that you are meeting for the first time, teachers, and coworkers are all different people that you would use some form of keigo with."),
+                    templatePageInfo(context, "assets/irasutoya/family.png",
                         "One of the most important factors for who you are talking to is age. Keigo is usually used when addressing someone older than yourself, and casual form is used when talking to someone younger."),
+                    templatePageInfo(context, "assets/irasutoya/kaisha.png",
+                        "Context also plays an important role. For example, in business settings, keigo might exclusively be used.",
+                        tooltip:
+                            "That being said, there are exceptions to these rules. For example, an older classmate or friend may prefer that you use casual language with them even though they are older"),
                     templatePageInfo(
                         context,
-                        "assets/irasutoya/study_nihongo.png",
-                        "Context also plays an important role. For example, in business settings, keigo might exclusively be used."),
-                    templatePageInfo(
-                        context,
-                        "assets/irasutoya/study_nihongo.png",
-                        "That being said, there are exceptions to these rules. For example, an older classmate or friend may prefer that you use casual language with them even though they are older"),
-                    templatePageInfo(
-                        context,
-                        "assets/irasutoya/study_nihongo.png",
+                        "assets/irasutoya/study_woman_normal.png",
                         "Given the complexity of keigo, Japanese speakers will not usually find it rude if a non-native speaker uses the wrong form. This topic can even be tricky for Japanese people sometimes, and they will recognize and appreciate the effort. The important thing is that you are making an effort to learn this language."),
                     templateMultipleChoiceQuestion(context, _questions[0]),
                     templateMultipleChoiceQuestion(context, _questions[1]),

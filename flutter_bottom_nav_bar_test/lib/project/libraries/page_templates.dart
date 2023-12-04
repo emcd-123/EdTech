@@ -30,63 +30,78 @@ Container templateTitlePage(context, image, text) {
   );
 }
 
-Container templatePageInfo(
-  context,
-  image,
-  text, {
-  String tooltip = "",
-  //int textSize
-}) {
+Container templatePageInfo(context, image, text,
+    {String tooltip = "", bool longText = false
+    //int textSize
+    }) {
+  List<Widget> children = [];
+
   if (tooltip != "") {
+    children = [
+      Image(image: AssetImage(image)),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: const EdgeInsets.fromLTRB(0, 0, 8, 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                JustTheTooltip(
+                  preferredDirection: AxisDirection.up,
+                  elevation: 8,
+                  isModal: true,
+                  content: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      tooltip,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                  child: const Material(
+                    color: Colors.yellowAccent,
+                    shape: CircleBorder(),
+                    elevation: 4.0,
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.lightbulb_outline,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: Text(
+              text,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          )
+        ],
+      )
+    ];
+  } else {
+    children = [
+      Image(image: AssetImage(image)),
+      Container(
+        padding: const EdgeInsets.only(left: 15, right: 15),
+        child: Text(text, style: Theme.of(context).textTheme.bodyMedium),
+      )
+    ];
+  }
+
+  if (longText == false) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       color: Colors.white,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Image(image: AssetImage(image)),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    JustTheTooltip(
-                      preferredDirection: AxisDirection.up,
-                      elevation: 8,
-                      isModal: true,
-                      content: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          tooltip,
-                        ),
-                      ),
-                      child: const Material(
-                        color: Colors.yellowAccent,
-                        shape: CircleBorder(),
-                        elevation: 4.0,
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.lightbulb_outline,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.only(left: 15, right: 15),
-                child: Text(text),
-              )
-            ],
-          ),
-        ],
+        children: children,
       ),
     );
   } else {
@@ -94,15 +109,8 @@ Container templatePageInfo(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       color: Colors.white,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Image(image: AssetImage(image)),
-          Container(
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            child: Text(text),
-          )
-        ],
+      child: ListView(
+        children: children,
       ),
     );
   }
@@ -141,13 +149,14 @@ Container templateLessonComplete(context, text, lessonName) {
                           .then((value) {
                         // this one will display a notification in 24 hours once the lesson in complete
                         // TODO: add a provider that will keep track of notifications so that they only get sent once every 24 hours in order to not be annoying
+                        // This will also use the notification provider as well
                         log(value.toString());
                         if (value != -1) {
                           NotificationService.showNotification(
-                              title: "Time to Practice! (1 hour test)",
-                              body: "Click here to improve your Japanese",
+                              title: "Time to Practice! (1 day test)",
+                              body: "This was sent at about 2:30 on 12/3",
                               scheduled: true,
-                              interval: 3600);
+                              interval: 86400);
                         }
                       });
                       // if (alreadyExists != 0) {
@@ -157,7 +166,7 @@ Container templateLessonComplete(context, text, lessonName) {
                       //       title: "Testing the 24 hour notification sending",
                       //       body: "How did it work?",
                       //       scheduled: true,
-                      //       interval: 86400);
+                      //       interval: );
                       // }
                       scoreKeeperProvider.clearTotalScore();
                       GoRouter.of(context).pop(context);
@@ -214,7 +223,6 @@ Container templateMultipleChoiceQuestion(context, questionNum) {
           MCQuestion(
             question: questionNum,
           ),
-          Text(scoreKeeperProvider.totalScore.toString())
         ],
       ),
     ),
@@ -239,8 +247,15 @@ Container templateOpenResponseQuestion(context, questionNum) {
 }
 
 //TODO
-Container templateFillInBlankQuestion(context, questionNum,
-    {String reviewOrExtra = "", String lessonName = ""}) {
+Container templateFillInBlankQuestion(
+  context,
+  questionNum, {
+  String reviewOrExtra = "",
+  String lessonName = "",
+  String image = "",
+}) {
+  log("IN TEMPLATE");
+  log(image);
   return Container(
     width: MediaQuery.of(context).size.width,
     height: MediaQuery.of(context).size.height,
@@ -254,7 +269,8 @@ Container templateFillInBlankQuestion(context, questionNum,
           FillInBlankQuestion(
               question: questionNum,
               reviewOrExtra: reviewOrExtra,
-              lessonName: lessonName)
+              lessonName: lessonName,
+              image: image)
         ],
       ),
     ),

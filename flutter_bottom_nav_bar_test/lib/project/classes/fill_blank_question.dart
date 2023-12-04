@@ -10,12 +10,14 @@ class FillInBlankQuestion extends StatefulWidget {
   Map<String, Object> question;
   String reviewOrExtra;
   String lessonName;
+  String image;
 
   FillInBlankQuestion(
       {super.key,
       required this.question,
       required this.reviewOrExtra,
-      required this.lessonName});
+      required this.lessonName,
+      required this.image});
 
   @override
   State<FillInBlankQuestion> createState() => _FillInBlankQuestionState();
@@ -73,7 +75,7 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion>
                 correctAnswerWasSelected = true;
                 buttonWasPressed = true;
                 log("correct answer selected and button pressed");
-                if (wasSRSUpdated == false) {
+                if (wasSRSUpdated == false && widget.reviewOrExtra == "r") {
                   db.updateReviewAddDays(
                     widget.lessonName,
                     true,
@@ -86,7 +88,7 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion>
                   answers.contains(value)) {
                 buttonWasPressed = true;
                 log("button was already pressed but answer is still correct");
-                if (wasSRSUpdated == false) {
+                if (wasSRSUpdated == false && widget.reviewOrExtra == "r") {
                   db.updateReviewAddDays(
                     widget.lessonName,
                     true,
@@ -99,7 +101,7 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion>
                   !answers.contains(value)) {
                 correctAnswerWasSelected = false;
                 log("incorrect answer chosen");
-                if (wasSRSUpdated == false) {
+                if (wasSRSUpdated == false && widget.reviewOrExtra == "r") {
                   db.updateReviewAddDays(
                     widget.lessonName,
                     false,
@@ -110,7 +112,7 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion>
               }
               //TODO: I don't like how this incorrect message is displayed, so change it later
               buttonWasPressed = true;
-              if (wasSRSUpdated == false) {
+              if (wasSRSUpdated == false && widget.reviewOrExtra == "r") {
                 db.updateReviewAddDays(
                   widget.lessonName,
                   false,
@@ -128,7 +130,21 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion>
     final List<Widget> splitList = splitWidget.toList();
     log(splitList.toString());
 
-    if (widget.reviewOrExtra == "r") {
+    int mediaWidth = 2;
+
+    if (widget.image == "boss") {
+      widget.image = "assets/irasutoya/boss_woman.png";
+    } else if (widget.image == "me") {
+      widget.image = "assets/irasutoya/kenjougo.jpg";
+    } else if (widget.image == "stranger") {
+      widget.image = "assets/irasutoya/yoroshiku_casual.png";
+      mediaWidth = 1;
+    } else if (widget.image == "friend") {
+      widget.image = "assets/irasutoya/friend.jpg";
+    }
+
+    if (widget.image == "") {
+      log("BLANK WIDGET");
       return Consumer<ScoreKeeperProvider>(builder: (BuildContext context,
           ScoreKeeperProvider scoreKeeperProvider, Widget? child) {
         return Center(
@@ -186,46 +202,51 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                "Fill in the Blank:",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+              const SizedBox(
+                height: 15,
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 5,
-                child: Center(
-                  child: Flexible(
-                    child: Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      alignment: WrapAlignment.start,
-                      spacing: 0,
-                      direction: Axis.horizontal,
-                      children: splitList,
+              Image(
+                image: AssetImage(widget.image),
+                width: MediaQuery.of(context).size.width / mediaWidth,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height / 8,
+                    child: Center(
+                      child: Flexible(
+                        child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          alignment: WrapAlignment.start,
+                          spacing: 0,
+                          direction: Axis.horizontal,
+                          children: splitList,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-              Text(
-                correctAnswerWasSelected ? "Well Done!" : "Try Again",
-                style: TextStyle(
-                    color: buttonWasPressed
-                        ? correctAnswerWasSelected
-                            ? Colors.green
-                            : Colors.red
-                        : Colors.white),
-              ),
-              ElevatedButton(
-                  //TODO: Deal with the ParentDataWidget error
-                  onPressed: correctAnswerWasSelected
-                      ? null
-                      : () {
-                          if (formKey.currentState!.validate()) {}
-                          setState(() {});
-                        },
-                  child: const Text("Submit"))
+                  Text(
+                    correctAnswerWasSelected ? "Well Done!" : "Try Again",
+                    style: TextStyle(
+                        color: buttonWasPressed
+                            ? correctAnswerWasSelected
+                                ? Colors.green
+                                : Colors.red
+                            : Colors.white),
+                  ),
+                  ElevatedButton(
+                      //TODO: Deal with the ParentDataWidget error
+                      onPressed: correctAnswerWasSelected
+                          ? null
+                          : () {
+                              if (formKey.currentState!.validate()) {}
+                              setState(() {});
+                            },
+                      child: const Text("Submit")),
+                ],
+              )
             ],
           ),
         ),

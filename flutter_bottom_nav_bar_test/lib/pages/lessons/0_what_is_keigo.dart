@@ -22,7 +22,7 @@ class _LessonWhatIsKeigoState extends State<LessonWhatIsKeigo> {
       'question': 'What is Keigo?',
       'questionType': "multipleChoice",
       'answers': [
-        {'answerText': 'A grammar thing', 'score': true},
+        {'answerText': 'A grammar concept', 'score': true},
         {'answerText': 'A food', 'score': false},
       ],
     },
@@ -57,7 +57,7 @@ class _LessonWhatIsKeigoState extends State<LessonWhatIsKeigo> {
               templatePageInfo(context, "assets/irasutoya/hierarchy.png",
                   """Japan is a very hierarchical culture. One's social status is so important that the way you speak can significantly change depending on who you are talking to. The Japanese keigo system is an embodiment of this hierarchy. When talking to someone of a higher social status, you will use keigo to show respect to them."""),
               templatePageInfo(context, "assets/irasutoya/boss_woman.png",
-                  """For example, the typical Japanese word for 'to eat' is 食べる. However, if you are asking your boss what they plan on eating, you would use the word 召し上がる for 'to eat' in order to show respect towards your boss. Alternatively, if you are talking to your boss and you are talking about what you yourself plan on eating, you would use the word いただく for 'to eat' since this humbles yourself when talking to your boss."""),
+                  """For example, the typical Japanese word for 'to eat' is 食べる (taberu). However, if you are asking your boss what they plan on eating, you would use the word 召し上がる (meshiagaru) for 'to eat' in order to show respect towards your boss. Alternatively, if you are talking to your boss and you are talking about what you yourself plan on eating, you would use the word いただく (itadaku) for 'to eat' since this humbles yourself when talking to your boss."""),
               templatePageInfo(context, "assets/irasutoya/nihonchizu.png",
                   """While it's not uncommon for languages to have more formal ways of speaking, what makes Japanese difficult for learners is how much more complicated its rules are."""),
               templatePageInfo(context, "assets/irasutoya/study_woman6.png",

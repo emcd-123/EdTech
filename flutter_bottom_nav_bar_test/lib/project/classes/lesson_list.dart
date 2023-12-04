@@ -36,29 +36,29 @@ class LessonList {
         lessonPath: "/levels_of_respect"));
 
     lessons.add(LessonList(
-        topic: "Nouns",
-        iconPath: "assets/svg/bento.svg",
+        topic: "Honorific Prefixes",
+        iconPath: "assets/svg/ninja.svg",
         lessonPath: "/meishi"));
 
     lessons.add(LessonList(
         topic: "To Be: だ",
-        iconPath: "assets/svg/ninja.svg",
+        iconPath: "assets/svg/sushi.svg",
         lessonPath: "/copula"));
 
     lessons.add(LessonList(
         topic: "食べる・飲む",
-        iconPath: "assets/svg/sushi.svg",
+        iconPath: "assets/svg/fuji.svg",
         lessonPath: "/taberu_nomu"));
 
     lessons.add(LessonList(
         topic: "To Exist: いる",
-        iconPath: "assets/svg/fuji.svg",
+        iconPath: "assets/svg/sake.svg",
         lessonPath: "/iru"));
 
     lessons.add(
       LessonList(
         topic: "To Do: する",
-        iconPath: "assets/svg/sake.svg",
+        iconPath: "assets/svg/letter.svg",
         lessonPath: "/suru",
       ),
     );
@@ -66,7 +66,7 @@ class LessonList {
     lessons.add(
       LessonList(
         topic: "To Go: 行く",
-        iconPath: "assets/svg/letter.svg",
+        iconPath: "assets/svg/torii.svg",
         lessonPath: "/iku",
       ),
     );
@@ -74,13 +74,13 @@ class LessonList {
     lessons.add(
       LessonList(
           topic: "To Come: 来る",
-          iconPath: "assets/svg/torii.svg",
+          iconPath: "assets/svg/noodles.svg",
           lessonPath: "/kuru"),
     );
 
     lessons.add(LessonList(
         topic: "In Groups and Out Groups",
-        iconPath: "assets/svg/noodles.svg",
+        iconPath: "assets/svg/bento.svg",
         lessonPath: "/uchi_soto"));
 
     lessons.add(LessonList(
