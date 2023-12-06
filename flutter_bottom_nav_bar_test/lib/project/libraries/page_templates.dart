@@ -151,23 +151,9 @@ Container templateLessonComplete(context, text, lessonName) {
                         // TODO: add a provider that will keep track of notifications so that they only get sent once every 24 hours in order to not be annoying
                         // This will also use the notification provider as well
                         log(value.toString());
-                        if (value != -1) {
-                          // NotificationService.showNotification(
-                          //     title: "Time to Practice! (1 day test)",
-                          //     body: "This was sent at about 2:30 on 12/3",
-                          //     scheduled: true,
-                          //     interval: 86400);
-                        }
+                        if (value != -1) {}
                       });
-                      // if (alreadyExists != 0) {
-                      //   NotificationService.showNotification(
-                      //       // title: "Time to Practice!",
-                      //       // body: "Click here to improve your Japanese",
-                      //       title: "Testing the 24 hour notification sending",
-                      //       body: "How did it work?",
-                      //       scheduled: true,
-                      //       interval: );
-                      // }
+
                       scoreKeeperProvider.clearTotalScore();
                       GoRouter.of(context).pop(context);
                     }
@@ -179,6 +165,63 @@ Container templateLessonComplete(context, text, lessonName) {
                           ? Colors.red
                           : Colors.grey)),
               child: const Text("Complete Lesson"))
+        ],
+      ),
+    ),
+  );
+}
+
+Container templateReviewsComplete(context, text) {
+  return Container(
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height,
+    color: Colors.white,
+    child: Consumer<ScoreKeeperProvider>(
+      builder: (BuildContext context, ScoreKeeperProvider scoreKeeperProvider,
+              Widget? child) =>
+          Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: scoreKeeperProvider.totalScore ==
+                    scoreKeeperProvider.requiredScore
+                ? Text(text)
+                : const Text(
+                    "Finish all the exercises before completing the review session"),
+          ),
+          ElevatedButton(
+              onPressed: scoreKeeperProvider.totalScore ==
+                      scoreKeeperProvider.requiredScore
+                  ? () {
+                      // This section adds a new review entry into the sql database
+                      DatabaseHelper.instance
+                          .getEarliestReviewDateTime()
+                          .then((value) {
+                        // this one will display a notification in 24 hours once the lesson in complete
+                        // TODO: add a provider that will keep track of notifications so that they only get sent once every 24 hours in order to not be annoying
+                        // This will also use the notification provider as well
+                        NotificationProvider()
+                            .setNotificationReview(value)
+                            .then(
+                          (sendNotif) {
+                            NotificationProvider()
+                                .scheduleNotification(sendNotif);
+                          },
+                        );
+                      });
+
+                      scoreKeeperProvider.clearTotalScore();
+                      GoRouter.of(context).pop(context);
+                    }
+                  : null,
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      scoreKeeperProvider.totalScore ==
+                              scoreKeeperProvider.requiredScore
+                          ? Colors.red
+                          : Colors.grey)),
+              child: const Text("Complete Review Session"))
         ],
       ),
     ),

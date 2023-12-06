@@ -79,6 +79,8 @@ class MyPracticeReviewsProvider extends ChangeNotifier {
             child: const Text("Error: question type unaccounted for")));
       }
     }
+    //TODO: I think this will work but should go back and check to make sure
+    practiceLessons.add(templateReviewsComplete(context, 'Testing this'));
 
     return practiceLessons;
   }

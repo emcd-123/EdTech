@@ -108,6 +108,13 @@ class DatabaseHelper {
     return review.nextReview;
   }
 
+  Future<DateTime> getEarliestReviewDateTime() async {
+    Database db = await instance.database;
+    var query = await db.query('review_schedule', orderBy: 'nextReview');
+    Review review = Review.fromMap(query[0]);
+    return review.nextReview;
+  }
+
   // Add a new review into the review schedule database
   Future<int> addReview(Review review) async {
     Database db = await instance.database;

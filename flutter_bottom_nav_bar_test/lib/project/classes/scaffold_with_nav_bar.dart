@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bottom_nav_bar_test/project/classes/database_classes.dart';
 import 'package:go_router/go_router.dart';
+import 'package:badges/badges.dart' as badges;
 
 class ScaffoldWithNavBar extends StatelessWidget {
   const ScaffoldWithNavBar({required this.child, super.key});
@@ -8,19 +10,41 @@ class ScaffoldWithNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: child,
-      bottomNavigationBar: BottomNavigationBar(
-          elevation: 20,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.school), label: "Learn"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.extension), label: "Practice"),
-            BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Chat")
-          ],
-          currentIndex: _calculateSelectedIndex(context),
-          onTap: (int idx) => _onItemTapped(idx, context)),
-    );
+    return FutureBuilder(
+        future: DatabaseHelper.instance.getReviewsDue(),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          int reviewsNum;
+          if (snapshot.data == null) {
+            reviewsNum = 0;
+          } else {
+            reviewsNum = snapshot.data.length;
+          }
+
+          return Scaffold(
+            body: child,
+            bottomNavigationBar: BottomNavigationBar(
+                elevation: 20,
+                items: <BottomNavigationBarItem>[
+                  const BottomNavigationBarItem(
+                      icon: Icon(Icons.school), label: "Learn"),
+                  BottomNavigationBarItem(
+                      icon: badges.Badge(
+                        badgeContent: Text(
+                          reviewsNum.toString(),
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        // badgeStyle: badges.BadgeStyle(),
+                        showBadge: reviewsNum != 0,
+                        child: const Icon(Icons.extension),
+                      ),
+                      label: "Practice"),
+                  const BottomNavigationBarItem(
+                      icon: Icon(Icons.chat), label: "Chat")
+                ],
+                currentIndex: _calculateSelectedIndex(context),
+                onTap: (int idx) => _onItemTapped(idx, context)),
+          );
+        });
   }
 
   static int _calculateSelectedIndex(context) {
