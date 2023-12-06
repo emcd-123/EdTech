@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/providers.dart';
 import 'package:provider/provider.dart';
 
-import 'database_classes.dart';
+import '../database_classes.dart';
 
 class FillInBlankQuestion extends StatefulWidget {
   Map<String, Object> question;

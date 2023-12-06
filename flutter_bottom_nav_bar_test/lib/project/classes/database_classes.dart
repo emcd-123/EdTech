@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter_bottom_nav_bar_test/project/classes/providers.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -99,6 +100,14 @@ class DatabaseHelper {
     return reviewList;
   }
 
+  Future<DateTime> getReviewDateTime(lessonName) async {
+    Database db = await instance.database;
+    var query = await db.query('review_schedule',
+        where: 'lessonName == ?', whereArgs: [lessonName]);
+    Review review = Review.fromMap(query[0]);
+    return review.nextReview;
+  }
+
   // Add a new review into the review schedule database
   Future<int> addReview(Review review) async {
     Database db = await instance.database;
@@ -106,8 +115,13 @@ class DatabaseHelper {
         where: 'lessonName == ?', whereArgs: [review.lessonName]);
     log(existingLesson.toString());
     if (existingLesson.isEmpty) {
+      NotificationProvider()
+          .setNotificationLesson(review.nextReview)
+          .then((e) => NotificationProvider().scheduleNotification(e));
+
       return await db.insert('review_schedule', review.toMap());
     } else {
+      //-1 means that the review already exists in the database
       return -1;
     }
   }
@@ -130,7 +144,7 @@ class DatabaseHelper {
 
     Review updatedReview = Review.fromMap(data[0]);
     int days = updatedReview.reviewStrength;
-    days = passed ? (days * (3 / 2)).ceil() : 1;
+    days = passed ? (days * (3 / 2)).ceil() : 1; // 2/3 for incorrect?
 
     updatedReview.nextReview = DateTime.now().add(Duration(days: days));
     updatedReview.reviewStrength = days;

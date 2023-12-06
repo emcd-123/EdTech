@@ -3,8 +3,8 @@ import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_bottom_nav_bar_test/project/classes/mc_answer.dart';
-import 'package:flutter_bottom_nav_bar_test/project/classes/mc_question.dart';
+import 'package:flutter_bottom_nav_bar_test/project/classes/questions/mc_answer.dart';
+import 'package:flutter_bottom_nav_bar_test/project/classes/questions/mc_question.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/providers.dart';
 import 'package:go_router/go_router.dart';
 import '../project/classes/database_classes.dart';

@@ -2,13 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/database_classes.dart';
-import 'package:flutter_bottom_nav_bar_test/project/classes/mc_question.dart';
+import 'package:flutter_bottom_nav_bar_test/project/classes/questions/mc_question.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/providers.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../classes/fill_blank_question.dart';
+import '../classes/questions/fill_blank_question.dart';
 import '../classes/notifications.dart';
 
 Container templateTitlePage(context, image, text) {
@@ -152,11 +152,11 @@ Container templateLessonComplete(context, text, lessonName) {
                         // This will also use the notification provider as well
                         log(value.toString());
                         if (value != -1) {
-                          NotificationService.showNotification(
-                              title: "Time to Practice! (1 day test)",
-                              body: "This was sent at about 2:30 on 12/3",
-                              scheduled: true,
-                              interval: 86400);
+                          // NotificationService.showNotification(
+                          //     title: "Time to Practice! (1 day test)",
+                          //     body: "This was sent at about 2:30 on 12/3",
+                          //     scheduled: true,
+                          //     interval: 86400);
                         }
                       });
                       // if (alreadyExists != 0) {

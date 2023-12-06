@@ -27,9 +27,9 @@ class ChatScreen extends StatelessWidget {
               onPressed: () async {
                 await NotificationService.showNotification(
                     title: "Scheduled notification",
-                    body: "Your Daily Practice Time has Arrived",
+                    body: "This notification should arrive at about 5:30",
                     scheduled: true,
-                    interval: 120);
+                    interval: 10800);
               },
               child: const Text("Test out a scheduled notification"),
             ),
