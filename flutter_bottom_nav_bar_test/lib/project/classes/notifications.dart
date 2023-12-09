@@ -5,7 +5,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter_bottom_nav_bar_test/project/routes/app_route_config.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../pages/practice.dart';
+import '../../pages/practice_page.dart';
 
 class NotificationService {
   static Future<void> initializeNotification() async {

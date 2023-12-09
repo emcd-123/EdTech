@@ -143,114 +143,154 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion>
       widget.image = "assets/irasutoya/friend.jpg";
     }
 
-    if (widget.image == "") {
-      log("BLANK WIDGET");
-      return Consumer<ScoreKeeperProvider>(builder: (BuildContext context,
-          ScoreKeeperProvider scoreKeeperProvider, Widget? child) {
-        return Center(
+    // if (widget.image == "") {
+    log("BLANK WIDGET");
+    return Consumer<ScoreKeeperProvider>(builder: (BuildContext context,
+        ScoreKeeperProvider scoreKeeperProvider, Widget? child) {
+      return Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Fill in the Blank:",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 5,
-                child: Center(
-                  child: Flexible(
-                    child: Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      alignment: WrapAlignment.start,
-                      spacing: 0,
-                      direction: Axis.horizontal,
-                      children: splitList,
-                    ),
-                  ),
-                ),
-              ),
-              Text(
-                correctAnswerWasSelected ? "Well Done!" : "Try Again",
-                style: TextStyle(
-                    color: buttonWasPressed
-                        ? correctAnswerWasSelected
-                            ? Colors.green
-                            : Colors.red
-                        : Colors.white),
-              ),
-              ElevatedButton(
-                  //TODO: Deal with the ParentDataWidget error
-                  onPressed: () {
-                    setState(() {});
-                    if (formKey.currentState!.validate()) {}
-                  },
-                  child: const Text("Submit"))
-            ],
-          ),
-        );
-      });
-      //TODO: PUT ONE MORE ELSE IF RIGHT HERE FOR EXTRAS
-    } else {
-      return Consumer<ScoreKeeperProvider>(
-        builder: (BuildContext context, ScoreKeeperProvider scoreKeeperProvider,
-                Widget? child) =>
-            Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(
-                height: 15,
-              ),
-              Image(
-                image: AssetImage(widget.image),
-                width: MediaQuery.of(context).size.width / mediaWidth,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 8,
-                    child: Center(
-                      child: Flexible(
-                        child: Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          alignment: WrapAlignment.start,
-                          spacing: 0,
-                          direction: Axis.horizontal,
-                          children: splitList,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+            widget.image == ""
+                ? const Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Text("Fill in the Blank:",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    ],
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                        const SizedBox(
+                          height: 15,
                         ),
+                        Image(
+                          image: AssetImage(widget.image),
+                          width: MediaQuery.of(context).size.width / mediaWidth,
+                        ),
+                      ]),
+            // widget.image == "" ?
+            // SizedBox(
+            //   width: MediaQuery.of(context).size.width,
+            //   height: MediaQuery.of(context).size.height / 5,
+            //   child: Center(
+            //     child: Flexible(
+            //       child: Wrap(
+            //         crossAxisAlignment: WrapCrossAlignment.center,
+            //         alignment: WrapAlignment.start,
+            //         spacing: 0,
+            //         direction: Axis.horizontal,
+            //         children: splitList,
+            //       ),
+            //     ),
+            //   ),
+            // ) :
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: widget.image == ''
+                      ? MediaQuery.of(context).size.height / 5
+                      : MediaQuery.of(context).size.height / 8,
+                  child: Center(
+                    child: Flexible(
+                      child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        alignment: WrapAlignment.start,
+                        spacing: 0,
+                        direction: Axis.horizontal,
+                        children: splitList,
                       ),
                     ),
                   ),
-                  Text(
-                    correctAnswerWasSelected ? "Well Done!" : "Try Again",
-                    style: TextStyle(
-                        color: buttonWasPressed
-                            ? correctAnswerWasSelected
-                                ? Colors.green
-                                : Colors.red
-                            : Colors.white),
-                  ),
-                  ElevatedButton(
-                      //TODO: Deal with the ParentDataWidget error
-                      onPressed: correctAnswerWasSelected
-                          ? null
-                          : () {
-                              if (formKey.currentState!.validate()) {}
-                              setState(() {});
-                            },
-                      child: const Text("Submit")),
-                ],
-              )
-            ],
-          ),
-        ),
-      );
-    }
+                ),
+                Text(
+                  correctAnswerWasSelected ? "Well Done!" : "Try Again",
+                  style: TextStyle(
+                      color: buttonWasPressed
+                          ? correctAnswerWasSelected
+                              ? Colors.green
+                              : Colors.red
+                          : Colors.white),
+                ),
+                ElevatedButton(
+                    //TODO: Deal with the ParentDataWidget error
+                    onPressed: () {
+                      setState(() {});
+                      if (formKey.currentState!.validate()) {}
+                    },
+                    child: const Text("Submit"))
+              ],
+            ),
+          ]));
+    });
+    //TODO: PUT ONE MORE ELSE IF RIGHT HERE FOR EXTRAS
+    // }
+    // else {
+    //   return Consumer<ScoreKeeperProvider>(
+    //     builder: (BuildContext context, ScoreKeeperProvider scoreKeeperProvider,
+    //             Widget? child) =>
+    //         Center(
+    //       child: Column(
+    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //         children: [
+    //           const SizedBox(
+    //             height: 15,
+    //           ),
+    //           Image(
+    //             image: AssetImage(widget.image),
+    //             width: MediaQuery.of(context).size.width / mediaWidth,
+    //           ),
+    //           Column(
+    //             mainAxisAlignment: MainAxisAlignment.center,
+    //             children: [
+    //               SizedBox(
+    //                 width: MediaQuery.of(context).size.width,
+    //                 height: MediaQuery.of(context).size.height / 8,
+    //                 child: Center(
+    //                   child: Flexible(
+    //                     child: Wrap(
+    //                       crossAxisAlignment: WrapCrossAlignment.center,
+    //                       alignment: WrapAlignment.start,
+    //                       spacing: 0,
+    //                       direction: Axis.horizontal,
+    //                       children: splitList,
+    //                     ),
+    //                   ),
+    //                 ),
+    //               ),
+    //               Text(
+    //                 correctAnswerWasSelected ? "Well Done!" : "Try Again",
+    //                 style: TextStyle(
+    //                     color: buttonWasPressed
+    //                         ? correctAnswerWasSelected
+    //                             ? Colors.green
+    //                             : Colors.red
+    //                         : Colors.white),
+    //               ),
+    //               ElevatedButton(
+    //                   //TODO: Deal with the ParentDataWidget error
+    //                   onPressed: correctAnswerWasSelected
+    //                       ? null
+    //                       : () {
+    //                           if (formKey.currentState!.validate()) {}
+    //                           setState(() {});
+    //                         },
+    //                   child: const Text("Submit")),
+    //             ],
+    //           )
+    //         ],
+    //       ),
+    //     ),
+    //   );
+    // }
   }
 }

@@ -1,6 +1,6 @@
-import 'package:flutter_bottom_nav_bar_test/pages/chat.dart';
-import 'package:flutter_bottom_nav_bar_test/pages/database.dart';
-import 'package:flutter_bottom_nav_bar_test/pages/learn.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/chat_page.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/database_page.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/learn_page.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/0_what_is_keigo.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/11_motte.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/12_miru.dart';
@@ -38,7 +38,7 @@ import 'package:flutter_bottom_nav_bar_test/pages/lessons/7_suru.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/8_iku.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/9_kuru.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/10_ingroups_outgroups.dart';
-import 'package:flutter_bottom_nav_bar_test/pages/practice.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/practice_page.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/scaffold_with_nav_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ import 'package:flutter_bottom_nav_bar_test/main.dart';
 
 import '../../pages/lessons/1_why_learn_keigo.dart';
 import '../../pages/lessons/2_when_to_use.dart';
-import '../../pages/practice_lesson.dart';
+import '../../pages/practice_lesson_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: "root");
