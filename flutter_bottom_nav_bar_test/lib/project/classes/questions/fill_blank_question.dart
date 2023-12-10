@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/providers.dart';
+import 'package:just_the_tooltip/just_the_tooltip.dart';
 import 'package:provider/provider.dart';
 
 import '../database_classes.dart';
@@ -40,6 +41,9 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion>
   Widget build(BuildContext context) {
     super.build(context);
     List<String> answers = widget.question['answers'] as List<String>;
+    String tooltipAnswer = answers[0];
+    String tooltipAnswerRomaji = answers[2];
+    String tooltipLessonName = widget.lessonName;
     final formKey = GlobalKey<FormState>();
     Iterable<String> splitStatement = widget.question['question']
         .toString()
@@ -143,114 +147,228 @@ class _FillInBlankQuestionState extends State<FillInBlankQuestion>
       widget.image = "assets/irasutoya/friend.jpg";
     }
 
-    if (widget.image == "") {
-      log("BLANK WIDGET");
-      return Consumer<ScoreKeeperProvider>(builder: (BuildContext context,
-          ScoreKeeperProvider scoreKeeperProvider, Widget? child) {
-        return Center(
+    // if (widget.image == "") {
+    log("BLANK WIDGET");
+    return Consumer<ScoreKeeperProvider>(builder: (BuildContext context,
+        ScoreKeeperProvider scoreKeeperProvider, Widget? child) {
+      return Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                "Fill in the Blank:",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 5,
-                child: Center(
-                  child: Flexible(
-                    child: Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      alignment: WrapAlignment.start,
-                      spacing: 0,
-                      direction: Axis.horizontal,
-                      children: splitList,
-                    ),
-                  ),
-                ),
-              ),
-              Text(
-                correctAnswerWasSelected ? "Well Done!" : "Try Again",
-                style: TextStyle(
-                    color: buttonWasPressed
-                        ? correctAnswerWasSelected
-                            ? Colors.green
-                            : Colors.red
-                        : Colors.white),
-              ),
-              ElevatedButton(
-                  //TODO: Deal with the ParentDataWidget error
-                  onPressed: () {
-                    setState(() {});
-                    if (formKey.currentState!.validate()) {}
-                  },
-                  child: const Text("Submit"))
-            ],
-          ),
-        );
-      });
-      //TODO: PUT ONE MORE ELSE IF RIGHT HERE FOR EXTRAS
-    } else {
-      return Consumer<ScoreKeeperProvider>(
-        builder: (BuildContext context, ScoreKeeperProvider scoreKeeperProvider,
-                Widget? child) =>
-            Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(
-                height: 15,
-              ),
-              Image(
-                image: AssetImage(widget.image),
-                width: MediaQuery.of(context).size.width / mediaWidth,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 8,
-                    child: Center(
-                      child: Flexible(
-                        child: Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          alignment: WrapAlignment.start,
-                          spacing: 0,
-                          direction: Axis.horizontal,
-                          children: splitList,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+            widget.image == ""
+                ? const Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Text("Fill in the Blank:",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    ],
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                        const SizedBox(
+                          height: 15,
                         ),
+                        Image(
+                          image: AssetImage(widget.image),
+                          width: MediaQuery.of(context).size.width / mediaWidth,
+                        ),
+                      ]),
+            // widget.image == "" ?
+            // SizedBox(
+            //   width: MediaQuery.of(context).size.width,
+            //   height: MediaQuery.of(context).size.height / 5,
+            //   child: Center(
+            //     child: Flexible(
+            //       child: Wrap(
+            //         crossAxisAlignment: WrapCrossAlignment.center,
+            //         alignment: WrapAlignment.start,
+            //         spacing: 0,
+            //         direction: Axis.horizontal,
+            //         children: splitList,
+            //       ),
+            //     ),
+            //   ),
+            // ) :
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: widget.image == ''
+                      ? MediaQuery.of(context).size.height / 5
+                      : MediaQuery.of(context).size.height / 8,
+                  child: Center(
+                    child: Flexible(
+                      child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        alignment: WrapAlignment.start,
+                        spacing: 0,
+                        direction: Axis.horizontal,
+                        children: splitList,
                       ),
                     ),
                   ),
-                  Text(
-                    correctAnswerWasSelected ? "Well Done!" : "Try Again",
-                    style: TextStyle(
-                        color: buttonWasPressed
-                            ? correctAnswerWasSelected
-                                ? Colors.green
-                                : Colors.red
-                            : Colors.white),
-                  ),
-                  ElevatedButton(
-                      //TODO: Deal with the ParentDataWidget error
-                      onPressed: correctAnswerWasSelected
-                          ? null
-                          : () {
-                              if (formKey.currentState!.validate()) {}
-                              setState(() {});
-                            },
-                      child: const Text("Submit")),
-                ],
-              )
-            ],
-          ),
-        ),
-      );
-    }
+                ),
+                Text(
+                  correctAnswerWasSelected ? "Well Done!" : "Try Again",
+                  style: TextStyle(
+                      color: buttonWasPressed
+                          ? correctAnswerWasSelected
+                              ? Colors.green
+                              : Colors.red
+                          : Colors.white),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(child: Container()),
+                    ElevatedButton(
+                        //TODO: Deal with the ParentDataWidget error
+                        onPressed: () {
+                          setState(() {});
+                          if (formKey.currentState!.validate()) {}
+                        },
+                        child: const Text("Submit")),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          widget.reviewOrExtra != 'r'
+                              ? JustTheTooltip(
+                                  preferredDirection: AxisDirection.up,
+                                  elevation: 8,
+                                  isModal: true,
+                                  content: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "Answer: $tooltipAnswer ($tooltipAnswerRomaji)",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium,
+                                    ),
+                                  ),
+                                  child: const Material(
+                                    color: Colors.white,
+                                    shape: CircleBorder(),
+                                    elevation: 0,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Icon(
+                                        Icons.help,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : (buttonWasPressed
+                                  ? JustTheTooltip(
+                                      preferredDirection: AxisDirection.up,
+                                      elevation: 8,
+                                      isModal: true,
+                                      content: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          correctAnswerWasSelected
+                                              ? "Check out the lesson on $tooltipLessonName for more help"
+                                              : "Answer: $tooltipAnswer ($tooltipAnswerRomaji)",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium,
+                                        ),
+                                      ),
+                                      child: const Material(
+                                        color: Colors.white,
+                                        shape: CircleBorder(),
+                                        elevation: 0,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Icon(
+                                            Icons.help,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : const SizedBox()),
+                          Expanded(
+                            child: Container(),
+                          )
+                        ],
+                      ),
+                    )
+                    // ),
+                    // icon: icon)
+                  ],
+                )
+              ],
+            ),
+          ]));
+    });
+    //TODO: PUT ONE MORE ELSE IF RIGHT HERE FOR EXTRAS
+    // }
+    // else {
+    //   return Consumer<ScoreKeeperProvider>(
+    //     builder: (BuildContext context, ScoreKeeperProvider scoreKeeperProvider,
+    //             Widget? child) =>
+    //         Center(
+    //       child: Column(
+    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //         children: [
+    //           const SizedBox(
+    //             height: 15,
+    //           ),
+    //           Image(
+    //             image: AssetImage(widget.image),
+    //             width: MediaQuery.of(context).size.width / mediaWidth,
+    //           ),
+    //           Column(
+    //             mainAxisAlignment: MainAxisAlignment.center,
+    //             children: [
+    //               SizedBox(
+    //                 width: MediaQuery.of(context).size.width,
+    //                 height: MediaQuery.of(context).size.height / 8,
+    //                 child: Center(
+    //                   child: Flexible(
+    //                     child: Wrap(
+    //                       crossAxisAlignment: WrapCrossAlignment.center,
+    //                       alignment: WrapAlignment.start,
+    //                       spacing: 0,
+    //                       direction: Axis.horizontal,
+    //                       children: splitList,
+    //                     ),
+    //                   ),
+    //                 ),
+    //               ),
+    //               Text(
+    //                 correctAnswerWasSelected ? "Well Done!" : "Try Again",
+    //                 style: TextStyle(
+    //                     color: buttonWasPressed
+    //                         ? correctAnswerWasSelected
+    //                             ? Colors.green
+    //                             : Colors.red
+    //                         : Colors.white),
+    //               ),
+    //               ElevatedButton(
+    //                   //TODO: Deal with the ParentDataWidget error
+    //                   onPressed: correctAnswerWasSelected
+    //                       ? null
+    //                       : () {
+    //                           if (formKey.currentState!.validate()) {}
+    //                           setState(() {});
+    //                         },
+    //                   child: const Text("Submit")),
+    //             ],
+    //           )
+    //         ],
+    //       ),
+    //     ),
+    //   );
+    // }
   }
 }

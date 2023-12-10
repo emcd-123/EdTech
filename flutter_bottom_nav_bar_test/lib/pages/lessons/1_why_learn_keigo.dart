@@ -29,7 +29,7 @@ class _LessonWhyLearnKeigoState extends State<LessonWhyLearnKeigo> {
     {
       'question': 'The respectful form of keigo is called___.',
       'questionType': "fillInTheBlank",
-      'answers': ['そんけいご', '尊敬語', 'sonkeigo', 'Sonkeigo'],
+      'answers': ['尊敬語', 'そんけいご', 'sonkeigo'],
     },
   ];
 

@@ -59,21 +59,21 @@ class MyPracticeReviewsProvider extends ChangeNotifier {
       currentReview = myPracticeReviews[i];
       String exerciseIndex = currentReview.lessonName;
       int whichExercise = Random().nextInt(exercises[exerciseIndex]!.length);
+      String img = exercises[exerciseIndex]![whichExercise]['image'] as String;
       if (exercises[exerciseIndex]![whichExercise]["questionType"] ==
           "fillInTheBlank") {
-        String img =
-            exercises[exerciseIndex]![whichExercise]['image'] as String;
-        if (img != "") {
-          practiceLessons.add(templateFillInBlankQuestion(
-              context, exercises[exerciseIndex]![whichExercise],
-              reviewOrExtra: "r",
-              lessonName: currentReview.lessonName,
-              image: img));
-        } else {
-          practiceLessons.add(templateFillInBlankQuestion(
-              context, exercises[exerciseIndex]![whichExercise],
-              reviewOrExtra: "r", lessonName: currentReview.lessonName));
-        }
+        practiceLessons.add(templateFillInBlankQuestion(
+            context, exercises[exerciseIndex]![whichExercise],
+            reviewOrExtra: "r",
+            lessonName: currentReview.lessonName,
+            image: img));
+      } else if (exercises[exerciseIndex]![whichExercise]["questionType"] ==
+          "chat") {
+        practiceLessons.add(templateChatQuestion(
+            context, exercises[exerciseIndex]![whichExercise],
+            reviewOrExtra: "r",
+            lessonName: currentReview.lessonName,
+            image: img));
       } else {
         practiceLessons.add(Container(
             child: const Text("Error: question type unaccounted for")));

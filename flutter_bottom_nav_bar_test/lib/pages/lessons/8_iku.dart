@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../project/classes/providers.dart';
+import '../../project/classes/questions/chat_exercise.dart';
 import '../../project/libraries/page_templates.dart';
 
 class LessonIku extends StatefulWidget {
@@ -25,6 +26,28 @@ class _LessonIkuState extends State<LessonIku> {
         {'answerText': 'To improve listening comprehension', 'score': true},
         {'answerText': 'For the challenge', 'score': true},
       ],
+    },
+    {
+      'question': const [
+        ChatBubble(
+          text: '雪が好きなので、来月北海道に参ります',
+          isCurrentUser: true,
+        ),
+        ChatBubble(
+          text: '本当ですか。先週北海道に行きました',
+          isCurrentUser: false,
+        ),
+        ChatBubble(
+          text: 'どうして北海道にいらっしゃいましたか。',
+          isCurrentUser: true,
+        ),
+        ChatBubble(text: "家族が北海道に住んでいるからです", isCurrentUser: false)
+      ],
+      'answerBubble': 2,
+      'affixes': ['どうして北海道に', 'ましたか'],
+      'questionType': 'chat',
+      'answers': ['いらっしゃい', 'irashai', 'irasshai'],
+      'image': 'boss'
     },
     {
       'question': 'The respectful form of keigo is called___.',
@@ -55,6 +78,7 @@ class _LessonIkuState extends State<LessonIku> {
           children: [
             templateTitlePage(
                 context, "assets/irasutoya/study_nihongo.png", "行く"),
+            templateChatQuestion(context, _questions[1], image: "boss"),
             templateWorkInProgress(context)
           ],
         ),

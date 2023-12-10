@@ -54,9 +54,9 @@ class _LearnScreenState extends State<LearnScreen> {
                 height: 110,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
-                      color: Colors.grey.shade600,
+                      color: Color.fromARGB(203, 171, 171, 171),
                       spreadRadius: 1,
                       blurRadius: 8,
                     ),
@@ -65,8 +65,11 @@ class _LearnScreenState extends State<LearnScreen> {
                   //border: Border.all(width: 4, color: Colors.grey),
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    const SizedBox(
+                      width: 40,
+                    ),
                     Container(
                       width: 80,
                       height: 80,
@@ -80,11 +83,15 @@ class _LearnScreenState extends State<LearnScreen> {
                         height: 20,
                       ),
                     ),
+                    Expanded(child: Container()),
                     Text(
                       lessons[index].topic,
                       style: Theme.of(context).textTheme.titleMedium,
                       // You can also use style: to style the text here
-                    )
+                    ),
+                    const SizedBox(
+                      width: 40,
+                    ),
                   ],
                 ),
               ),

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/database_classes.dart';
+import 'package:flutter_bottom_nav_bar_test/project/classes/questions/chat_exercise.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/questions/mc_question.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/providers.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
@@ -20,9 +21,13 @@ Container templateTitlePage(context, image, text) {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(text,
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Text(text,
+                textAlign: TextAlign.center,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+          ),
           Image(image: AssetImage(image))
         ],
       ),
@@ -289,7 +294,6 @@ Container templateOpenResponseQuestion(context, questionNum) {
   );
 }
 
-//TODO
 Container templateFillInBlankQuestion(
   context,
   questionNum, {
@@ -316,6 +320,33 @@ Container templateFillInBlankQuestion(
               image: image)
         ],
       ),
+    ),
+  );
+}
+
+Container templateChatQuestion(
+  context,
+  questionNum, {
+  String reviewOrExtra = "",
+  String lessonName = "",
+  String image = "",
+}) {
+  log("IN TEMPLATE");
+  log(image);
+  return Container(
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height,
+    color: Colors.white,
+    child: Consumer<ScoreKeeperProvider>(
+      builder: (BuildContext context, ScoreKeeperProvider scoreKeeperProvider,
+              Widget? child) =>
+          Container(
+              //TODO GET RID OF THIS COLUMN AFTER DEBUGGING I DO NOT LIKE IT
+              child: ChatQuestion(
+                  question: questionNum,
+                  reviewOrExtra: reviewOrExtra,
+                  lessonName: lessonName,
+                  image: image)),
     ),
   );
 }

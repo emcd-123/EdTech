@@ -79,7 +79,7 @@ class LessonList {
     );
 
     lessons.add(LessonList(
-        topic: "In Groups and Out Groups",
+        topic: "内・外",
         iconPath: "assets/svg/bento.svg",
         lessonPath: "/uchi_soto"));
 
@@ -187,7 +187,7 @@ class LessonList {
 
     lessons.add(
       LessonList(
-        topic: "どちら・こちら・そちら・あちら",
+        topic: "どちら・こちら",
         iconPath: "assets/svg/bento.svg",
         lessonPath: "/dochira",
       ),

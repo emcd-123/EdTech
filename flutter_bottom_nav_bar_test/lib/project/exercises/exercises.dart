@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+
+import '../classes/questions/chat_exercise.dart';
+
 final Map<String, List<Map<String, Object>>> exercises = {
   'what_is_keigo': [
     {
@@ -135,37 +139,37 @@ final Map<String, List<Map<String, Object>>> exercises = {
     {
       'question': 'Fill in the correct prefix: ___水.',
       'questionType': "fillInTheBlank",
-      'answers': ['お', 'o'],
+      'answers': ['お', '御', 'o'],
       'image': ''
     },
     {
       'question': 'Fill in the correct prefix: ___満足.',
       'questionType': "fillInTheBlank",
-      'answers': ['ご', 'go'],
+      'answers': ['ご', '御', 'go'],
       'image': ''
     },
     {
       'question': 'Fill in the correct prefix: ___名前.',
       'questionType': "fillInTheBlank",
-      'answers': ['お', 'o'],
+      'answers': ['お', '御', 'o'],
       'image': ''
     },
     {
       'question': 'Fill in the correct prefix: ___米.',
       'questionType': "fillInTheBlank",
-      'answers': ['お', 'o'],
+      'answers': ['お', '御', 'o'],
       'image': ''
     },
     {
       'question': 'Fill in the correct prefix: ___気分.',
       'questionType': "fillInTheBlank",
-      'answers': ['ご', 'go'],
+      'answers': ['ご', '御', 'go'],
       'image': ''
     },
     {
       'question': 'Fill in the correct prefix: ___質問.',
       'questionType': "fillInTheBlank",
-      'answers': ['ご', 'go'],
+      'answers': ['ご', '御', 'go'],
       'image': ''
     },
   ],
@@ -218,5 +222,51 @@ final Map<String, List<Map<String, Object>>> exercises = {
       'answers': ['食べる', 'たべる', 'taberu'],
       'image': 'friend'
     },
+  ],
+  'だ: To Be': [
+    //Maybe have the last entry into this list be the next needed in the message field
+    {
+      'question': ListView(children: const [
+        ChatBubble(
+          text: '先週、北海道に行きました。',
+          isCurrentUser: false,
+        ),
+        ChatBubble(
+          text: 'Awesome! Next time you gotta come as well!',
+          isCurrentUser: true,
+        ),
+        ChatBubble(
+          text: 'Ok, when is the next date?',
+          isCurrentUser: false,
+        ),
+      ]),
+      'questionType': 'chat',
+      'answers': [],
+      'image': 'boss'
+    }
+  ],
+  '行く: To Go': [
+    //Maybe have the last entry into this list be the next needed in the message field
+    {
+      'question': ListView(children: const [
+        ChatBubble(
+          text: '雪が好きので、来月北海道に参ります',
+          isCurrentUser: true,
+        ),
+        ChatBubble(
+          text: '本当ですか。先週北海道に行きました',
+          isCurrentUser: false,
+        ),
+        ChatBubble(
+          text: 'どうして北海道に___ましたか。',
+          isCurrentUser: true,
+        ),
+        ChatBubble(text: "家族が北海道に住むからです", isCurrentUser: false)
+      ]),
+      'answerBubble': 2,
+      'questionType': 'chat',
+      'answers': ['いらっしゃい', 'irashai', 'irasshai'],
+      'image': 'boss'
+    }
   ]
 };

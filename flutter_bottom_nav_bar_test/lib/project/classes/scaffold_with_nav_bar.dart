@@ -7,6 +7,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
   const ScaffoldWithNavBar({required this.child, super.key});
 
   final Widget child;
+  final bool debugMode = true;
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +39,9 @@ class ScaffoldWithNavBar extends StatelessWidget {
                         child: const Icon(Icons.extension),
                       ),
                       label: "Practice"),
-                  const BottomNavigationBarItem(
-                      icon: Icon(Icons.chat), label: "Chat")
+                  if (debugMode)
+                    const BottomNavigationBarItem(
+                        icon: Icon(Icons.settings), label: "Debug")
                 ],
                 currentIndex: _calculateSelectedIndex(context),
                 onTap: (int idx) => _onItemTapped(idx, context)),
