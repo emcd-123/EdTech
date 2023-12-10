@@ -52,9 +52,9 @@ class _MCAnswerState extends State<MCAnswer> {
                     : Colors.red
                 : Colors.white,
             borderRadius: BorderRadius.circular(15),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
-                color: Colors.grey.shade600,
+                color: Color.fromARGB(203, 171, 171, 171),
                 spreadRadius: 1,
                 blurRadius: 8,
               ),

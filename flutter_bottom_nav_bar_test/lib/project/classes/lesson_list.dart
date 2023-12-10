@@ -65,22 +65,22 @@ class LessonList {
 
     lessons.add(
       LessonList(
-        topic: "To Go: 行く",
+        topic: "行く・来る",
         iconPath: "assets/svg/torii.svg",
         lessonPath: "/iku",
       ),
     );
 
-    lessons.add(
-      LessonList(
-          topic: "To Come: 来る",
-          iconPath: "assets/svg/noodles.svg",
-          lessonPath: "/kuru"),
-    );
+    // lessons.add(
+    //   LessonList(
+    //       topic: "To Come: 来る",
+    //       iconPath: "assets/svg/noodles.svg",
+    //       lessonPath: "/kuru"),
+    // );
 
     lessons.add(LessonList(
         topic: "内・外",
-        iconPath: "assets/svg/bento.svg",
+        iconPath: "assets/svg/noodles.svg",
         lessonPath: "/uchi_soto"));
 
     lessons.add(LessonList(

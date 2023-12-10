@@ -19,8 +19,11 @@ class NotificationStorage {
       final file = await _localFile;
 
       final content = await file.readAsString();
-
-      return DateTime.parse(content);
+      if (content == "") {
+        return DateTime(1970, 1, 1);
+      } else {
+        return DateTime.parse(content);
+      }
     } catch (e) {
       return DateTime(1970, 1, 1);
     }

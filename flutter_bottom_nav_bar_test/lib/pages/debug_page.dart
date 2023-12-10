@@ -14,7 +14,7 @@ class ChatScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             const Text(
-                "Chat Screen: Currently using to test notifications and sqlite database"),
+                "Debug Screen: Currently using to test notifications and sqlite database"),
             ElevatedButton(
               onPressed: () async {
                 await NotificationService.showNotification(

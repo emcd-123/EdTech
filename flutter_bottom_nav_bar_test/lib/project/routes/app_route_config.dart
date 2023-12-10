@@ -1,4 +1,4 @@
-import 'package:flutter_bottom_nav_bar_test/pages/chat_page.dart';
+import 'package:flutter_bottom_nav_bar_test/pages/debug_page.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/database_page.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/learn_page.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/0_what_is_keigo.dart';
