@@ -21,9 +21,13 @@ Container templateTitlePage(context, image, text) {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(text,
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Text(text,
+                textAlign: TextAlign.center,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+          ),
           Image(image: AssetImage(image))
         ],
       ),
@@ -336,16 +340,13 @@ Container templateChatQuestion(
     child: Consumer<ScoreKeeperProvider>(
       builder: (BuildContext context, ScoreKeeperProvider scoreKeeperProvider,
               Widget? child) =>
-          Column(
-        //TODO GET RID OF THIS COLUMN AFTER DEBUGGING I DO NOT LIKE IT
-        children: [
-          ChatQuestion(
-              question: questionNum,
-              reviewOrExtra: reviewOrExtra,
-              lessonName: lessonName,
-              image: image)
-        ],
-      ),
+          Container(
+              //TODO GET RID OF THIS COLUMN AFTER DEBUGGING I DO NOT LIKE IT
+              child: ChatQuestion(
+                  question: questionNum,
+                  reviewOrExtra: reviewOrExtra,
+                  lessonName: lessonName,
+                  image: image)),
     ),
   );
 }

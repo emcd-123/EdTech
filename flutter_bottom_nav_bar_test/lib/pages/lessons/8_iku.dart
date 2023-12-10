@@ -30,7 +30,7 @@ class _LessonIkuState extends State<LessonIku> {
     {
       'question': const [
         ChatBubble(
-          text: '雪が好きので、来月北海道に参ります',
+          text: '雪が好きなので、来月北海道に参ります',
           isCurrentUser: true,
         ),
         ChatBubble(
@@ -38,14 +38,15 @@ class _LessonIkuState extends State<LessonIku> {
           isCurrentUser: false,
         ),
         ChatBubble(
-          text: 'どうして北海道に___ましたか。',
+          text: 'どうして北海道にいらっしゃいましたか。',
           isCurrentUser: true,
         ),
-        ChatBubble(text: "家族が北海道に住むからです", isCurrentUser: false)
+        ChatBubble(text: "家族が北海道に住んでいるからです", isCurrentUser: false)
       ],
       'answerBubble': 2,
+      'affixes': ['どうして北海道に', 'ましたか'],
       'questionType': 'chat',
-      'answers': ['いらっしゃい', 'irasshai', 'irashai'],
+      'answers': ['いらっしゃい', 'irashai', 'irasshai'],
       'image': 'boss'
     },
     {

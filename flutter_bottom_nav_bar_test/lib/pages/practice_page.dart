@@ -46,7 +46,9 @@ class _PracticeScreenState extends State<PracticeScreen> {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(howManyReviewsText),
+                  Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                      child: Text(howManyReviewsText)),
                   ElevatedButton(
                     onPressed: () {
                       GoRouter.of(context).push('/practice_lesson');

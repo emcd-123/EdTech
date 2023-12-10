@@ -38,11 +38,14 @@ class _MCQuestionState extends State<MCQuestion>
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 4,
               child: Center(
-                child: Text(
-                  widget.question['question'].toString(),
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                  child: Text(
+                    widget.question['question'].toString(),
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),

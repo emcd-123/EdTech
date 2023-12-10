@@ -17,33 +17,33 @@ class _LessonLevelsOfRespectState extends State<LessonLevelsOfRespect> {
     {
       'question': 'The respectful form of keigo is called___.',
       'questionType': "fillInTheBlank",
-      'answers': ['そんけいご', '尊敬語', 'sonkeigo', 'Sonkeigo'],
+      'answers': ['尊敬語', 'そんけいご', 'sonkeigo', 'Sonkeigo'],
     },
     {
       'question':
           'You are talking to your boss, use 尊敬語 (sonkeigo): お寿司を___ますか。',
       'questionType': "fillInTheBlank",
-      'answers': ["めしあがり", "召し上がり", "meshiagari"],
+      'answers': ["召し上がり", "めしあがり", "meshiagari"],
       'image': 'boss'
     },
     {
       'question':
           'You are talking about yourself, use 謙譲語 (kenjougo): お寿司を___ますか。',
       'questionType': "fillInTheBlank",
-      'answers': ["itadaki", "いただき", "頂き"],
+      'answers': ["頂き", "いただき", "itadaki"],
       'image': 'me'
     },
     {
       'question':
           'You are talking to a stranger, use 丁寧語 (teineigo): お寿司を___ますか。',
       'questionType': "fillInTheBlank",
-      'answers': ["tabe", "たべ", "食べ"],
+      'answers': ["食べ", "たべ", "tabe"],
       'image': 'stranger'
     },
     {
       'question': 'You are talking to a friend, use タメ語 (tamego): すしを___る?',
       'questionType': "fillInTheBlank",
-      'answers': ["tabe", "たべ", "食べ"],
+      'answers': ["食べ", "たべ", "tabe"],
     },
   ];
 
@@ -69,7 +69,7 @@ class _LessonLevelsOfRespectState extends State<LessonLevelsOfRespect> {
             templateTitlePage(
                 context,
                 "assets/irasutoya/school_sensei_kokuban_woman.png",
-                "Levels of Respect: 丁寧語, 尊敬語, and 謙譲語"),
+                "Levels of Respect:\n丁寧語, 尊敬語, and 謙譲語"),
             templatePageInfo(context, "assets/irasutoya/choice.jpg",
                 """Keigo can be broken down into three different types: 丁寧語 (teineigo), 尊敬語 (sonkeigo), and 謙譲語 (kenjougo).
 Each one of these has a different context that it is used in, and each one conveys politeness in a different way.

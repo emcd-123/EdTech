@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:just_the_tooltip/just_the_tooltip.dart';
 import 'package:provider/provider.dart';
 import '../database_classes.dart';
 import '../providers.dart';
@@ -74,26 +76,160 @@ class _ChatQuestionState extends State<ChatQuestion>
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
-  _buildMessageComposer() {
+  _buildMessageComposer(formKey, answers) {
+    List affixes = widget.question['affixes'] as List;
+    String tooltipAnswer = answers[0];
+    String tooltipAnswerRomaji = answers[2];
+    String tooltipLessonName = widget.lessonName;
+
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         height: 70,
         color: Colors.white,
         child: Row(
           children: <Widget>[
-            const SizedBox(
-              width: 15,
-            ),
+            widget.reviewOrExtra != 'r'
+                ? JustTheTooltip(
+                    preferredDirection: AxisDirection.up,
+                    elevation: 8,
+                    isModal: true,
+                    content: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Answer: $tooltipAnswer ($tooltipAnswerRomaji)",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                    child: const Material(
+                      color: Colors.white,
+                      shape: CircleBorder(),
+                      elevation: 0,
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.help,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                  )
+                : (buttonWasPressed
+                    ? JustTheTooltip(
+                        preferredDirection: AxisDirection.up,
+                        elevation: 8,
+                        isModal: true,
+                        content: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            correctAnswerWasSelected
+                                ? "Check out the lesson on $tooltipLessonName for more help"
+                                : "Answer: $tooltipAnswer ($tooltipAnswerRomaji)",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ),
+                        child: const Material(
+                          color: Colors.white,
+                          shape: CircleBorder(),
+                          elevation: 0,
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.help,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox()),
             Expanded(
-                child: TextField(
-              onChanged: (value) {},
-              decoration: const InputDecoration.collapsed(hintText: "here"),
-            )),
+              child: Form(
+                key: formKey,
+                child: Consumer(
+                  builder: (BuildContext context,
+                          ScoreKeeperProvider scoreKeeperProvider,
+                          Widget? child) =>
+                      TextFormField(
+                    onChanged: (value) {},
+                    decoration: InputDecoration(
+                        prefix: Text(
+                          affixes[0],
+                          style: const TextStyle(color: Colors.black),
+                        ),
+                        suffix: Text(affixes[1],
+                            style: const TextStyle(color: Colors.black)),
+                        hintText: "      "),
+                    validator: (value) {
+                      value = value!.toLowerCase().trim();
+                      if (correctAnswerWasSelected == false &&
+                          answers.contains(value)) {
+                        scoreKeeperProvider.addTotalScore();
+                        correctAnswerWasSelected = true;
+                        buttonWasPressed = true;
+                        log("correct answer selected and button pressed");
+                        if (wasSRSUpdated == false &&
+                            widget.reviewOrExtra == "r") {
+                          db.updateReviewAddDays(
+                            widget.lessonName,
+                            true,
+                          );
+                          wasSRSUpdated = true;
+                        }
+                        return "Correct";
+                      } else if (correctAnswerWasSelected == true &&
+                          answers.contains(value)) {
+                        buttonWasPressed = true;
+                        log("button was already pressed but answer is still correct");
+                        if (wasSRSUpdated == false &&
+                            widget.reviewOrExtra == "r") {
+                          db.updateReviewAddDays(
+                            widget.lessonName,
+                            true,
+                          );
+                          wasSRSUpdated = true;
+                        }
+
+                        return "Correct again";
+                      } else if (correctAnswerWasSelected == true &&
+                          !answers.contains(value)) {
+                        correctAnswerWasSelected = false;
+                        log("incorrect answer chosen");
+                        // _textEditingController.clear();
+                        if (wasSRSUpdated == false &&
+                            widget.reviewOrExtra == "r") {
+                          db.updateReviewAddDays(
+                            widget.lessonName,
+                            false,
+                          );
+                          wasSRSUpdated = true;
+                        }
+                        return "Incorrect";
+                      }
+                      //TODO: I don't like how this incorrect message is displayed, so change it later
+                      buttonWasPressed = true;
+                      if (wasSRSUpdated == false &&
+                          widget.reviewOrExtra == "r") {
+                        // _textEditingController.clear();
+                        db.updateReviewAddDays(
+                          widget.lessonName,
+                          false,
+                        );
+                        wasSRSUpdated = true;
+                      }
+                      log("incorrect answer");
+                      return "Incorrect";
+                    },
+                  ),
+                ),
+              ),
+            ),
             const SizedBox(
               width: 15,
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                if (formKey.currentState!.validate()) {}
+                setState(() {});
+              },
               icon: const Icon(Icons.send),
               iconSize: 25,
               color: Theme.of(context).primaryColor,
@@ -105,96 +241,10 @@ class _ChatQuestionState extends State<ChatQuestion>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    // List<String> answers = widget.question['answers'] as List<String>;
-    // final formKey = GlobalKey<FormState>();
-    // Iterable<String> splitStatement = widget.question['question']
-    //     .toString()
-    //     .replaceAll("___", " @ ")
-    //     .split(" ")
-    //     .map((e) => "$e ");
-
-    // Iterable<Widget> splitWidget = splitStatement //.where((e) => e == "@ ")
-    //     .map((e) {
-    //   if (e != "@ ") {
-    //     return Text(
-    //       e,
-    //       style: const TextStyle(
-    //         fontSize: 20,
-    //         fontWeight: FontWeight.bold,
-    //       ),
-    //     );
-    //   }
-    //   return Form(
-    //     key: formKey,
-    //     child: Consumer(
-    //       builder: (BuildContext context,
-    //               ScoreKeeperProvider scoreKeeperProvider, Widget? child) =>
-    //           TextFormField(
-    //         decoration: const InputDecoration(
-    //             constraints: BoxConstraints(maxHeight: 40, maxWidth: 100)),
-    //         autofocus: true,
-    //         validator: (value) {
-    //           value = value!.toLowerCase().trim();
-    //           if (correctAnswerWasSelected == false &&
-    //               answers.contains(value)) {
-    //             scoreKeeperProvider.addTotalScore();
-    //             correctAnswerWasSelected = true;
-    //             buttonWasPressed = true;
-    //             log("correct answer selected and button pressed");
-    //             if (wasSRSUpdated == false && widget.reviewOrExtra == "r") {
-    //               db.updateReviewAddDays(
-    //                 widget.lessonName,
-    //                 true,
-    //               );
-    //               wasSRSUpdated = true;
-    //             }
-
-    //             return "Correct";
-    //           } else if (correctAnswerWasSelected == true &&
-    //               answers.contains(value)) {
-    //             buttonWasPressed = true;
-    //             log("button was already pressed but answer is still correct");
-    //             if (wasSRSUpdated == false && widget.reviewOrExtra == "r") {
-    //               db.updateReviewAddDays(
-    //                 widget.lessonName,
-    //                 true,
-    //               );
-    //               wasSRSUpdated = true;
-    //             }
-
-    //             return "Correct again";
-    //           } else if (correctAnswerWasSelected == true &&
-    //               !answers.contains(value)) {
-    //             correctAnswerWasSelected = false;
-    //             log("incorrect answer chosen");
-    //             if (wasSRSUpdated == false && widget.reviewOrExtra == "r") {
-    //               db.updateReviewAddDays(
-    //                 widget.lessonName,
-    //                 false,
-    //               );
-    //               wasSRSUpdated = true;
-    //             }
-    //             return "Incorrect";
-    //           }
-    //           //TODO: I don't like how this incorrect message is displayed, so change it later
-    //           buttonWasPressed = true;
-    //           if (wasSRSUpdated == false && widget.reviewOrExtra == "r") {
-    //             db.updateReviewAddDays(
-    //               widget.lessonName,
-    //               false,
-    //             );
-    //             wasSRSUpdated = true;
-    //           }
-    //           log("incorrect answer");
-    //           return "Incorrect";
-    //         },
-    //       ),
-    //     ),
-    //   );
-    // });
-
-    // final List<Widget> splitList = splitWidget.toList();
-    // log(splitList.toString());
+    List<String> answers = widget.question['answers'] as List<String>;
+    final formKey = GlobalKey<FormState>();
+    final GlobalKey<AnimatedListState> _listKey =
+        GlobalKey<AnimatedListState>();
 
     int mediaWidth = 2;
 
@@ -213,149 +263,94 @@ class _ChatQuestionState extends State<ChatQuestion>
     List<Widget> chat = widget.question["question"] as List<Widget>;
     log(widget.image.toString());
 
+    int bubbleNum = widget.question['answerBubble'] as int;
+
+    List animatedBubbles;
+    if (correctAnswerWasSelected) {
+      animatedBubbles = chat.sublist(bubbleNum, chat.length);
+    } else {
+      animatedBubbles = [];
+    }
     log("BEOFRE THE RETURN");
 
-    return Consumer<ScoreKeeperProvider>(builder: (BuildContext context,
-            ScoreKeeperProvider scoreKeeperProvider, Widget? child) {
-      log("AFTER THE CONSUMER");
-      return Expanded(
-        child: ListView(
-          children: [
-            Column(
-              children: [
-                const SizedBox(
-                  height: 15,
-                ),
-                const Text(
-                  "Complete the conversation:",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Image(
-                  image: AssetImage(widget.image),
-                  width: MediaQuery.of(context).size.width / mediaWidth,
-                ),
-              ],
-            )
-            // widget.image == ""
-            //     ? const Text(
-            //         "Complete the conversation:",
-            //         style: TextStyle(
-            //           fontSize: 20,
-            //           fontWeight: FontWeight.bold,
-            //         ),
-            //       )
-            //     : Column(
-            //         children: [
-            //           const SizedBox(
-            //             height: 15,
-            //           ),
-            //           const Text(
-            //             "Complete the conversation:",
-            //             style: TextStyle(
-            //               fontSize: 20,
-            //               fontWeight: FontWeight.bold,
-            //             ),
-            //           ),
-            //           const SizedBox(
-            //             height: 15,
-            //           ),
-            //           Image(
-            //             image: AssetImage(widget.image),
-            //             width: MediaQuery.of(context).size.width / mediaWidth,
-            //           ),
-            //         ],
-            //       )
-          ],
-        ),
-      );
-    }
-
-        // _buildMessageComposer()
-//
-        //
-        // Align(
-        //     alignment: Alignment.bottomLeft,
-        //     child: Container(
-        //       padding: EdgeInsets.only(left: 10, bottom: 10, top: 10),
-        //       height: 60,
-        //       width: double.infinity,
-        //       color: Colors.white,
-        //       child: Row(
-        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //         children: [
-        //           const Wrap(
-        //             crossAxisAlignment: WrapCrossAlignment.center,
-        //             alignment: WrapAlignment.start,
-        //             spacing: 0,
-        //             direction: Axis.horizontal,
-        //             children: [
-        //               Text("here "),
-        //               Text("data "),
-        //               Text("data "),
-        //               Text("data "),
-        //               Text("data "),
-        //               Text("data "),
-        //               Text("data "),
-        //               Text("data "),
-        //               Text("data "),
-        //               Text("data "),
-        //               Text("data "),
-        //               Text("data "),
-        //               Text("data "),
-        //             ],
-        //           ),
-        //           const SizedBox(
-        //             width: 15,
-        //           ),
-        //           FloatingActionButton(
-        //             onPressed: () {},
-        //             backgroundColor: Colors.red,
-        //             elevation: 0,
-        //             child: const Icon(Icons.send,
-        //                 color: Colors.white, size: 18),
-        //           )
-        //         ],
-        //       ),
-        //     ))
-        // // SizedBox(
-        // //   width: MediaQuery.of(context).size.width,
-        // //   height: MediaQuery.of(context).size.height / 5,
-        // //   child: Center(
-        // //     child: Flexible(
-        // //       child: Wrap(
-        // //         crossAxisAlignment: WrapCrossAlignment.center,
-        // //         alignment: WrapAlignment.start,
-        // //         spacing: 0,
-        // //         direction: Axis.horizontal,
-        // //         children: splitList,
-        // //       ),
-        // //     ),
-        // //   ),
-        // // ),
-        // Text(
-        //   correctAnswerWasSelected ? "Well Done!" : "Try Again",
-        //   style: TextStyle(
-        //       color: buttonWasPressed
-        //           ? correctAnswerWasSelected
-        //               ? Colors.green
-        //               : Colors.red
-        //           : Colors.white),
-        // ),
-        // ElevatedButton(
-        //     //TODO: Deal with the ParentDataWidget error
-        //     onPressed: () {
-        //       setState(() {});
-        //       // if (formKey.currentState!.validate()) {}
-        //     },
-        //     child: const Text("Submit"))
-
+    return Consumer<ScoreKeeperProvider>(
+      builder: (BuildContext context, ScoreKeeperProvider scoreKeeperProvider,
+          Widget? child) {
+        log("AFTER THE CONSUMER");
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView(children: [
+                  widget.image != ""
+                      ? Column(
+                          children: [
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            const Text(
+                              "Complete the conversation:",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Image(
+                              image: AssetImage(widget.image),
+                              width: MediaQuery.of(context).size.width /
+                                  mediaWidth,
+                            ),
+                          ],
+                        )
+                      : const Text(
+                          "Complete the conversation:",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                  for (var bubble in chat.sublist(0, bubbleNum)) bubble,
+                  for (int i = 0; i < animatedBubbles.length; i++)
+                    Container(
+                      child: animatedBubbles[i],
+                    )
+                        .animate(
+                            delay: Duration(milliseconds: (2500 * i - 1) + 100))
+                        .fade(duration: 100.ms, end: 1, begin: 0)
+                        .scale(begin: const Offset(0, 0))
+                        .move(
+                            begin: animatedBubbles[i].isCurrentUser
+                                ? const Offset(400, 75)
+                                : const Offset(-400, 75))
+                ]),
+              ),
+              //TODO: THIS NEED TO BE FIXED SO THAT IT WILL SHOW UP CORRECTLY ONCE IN THE INPUT IS USED MULTIPLE TIMES
+              buttonWasPressed
+                  ? Text(
+                      correctAnswerWasSelected ? "Well Done!" : "Try Again",
+                      style: TextStyle(
+                          color: correctAnswerWasSelected
+                              ? Colors.green
+                              : Colors.red),
+                    )
+                      .animate(
+                          delay: correctAnswerWasSelected
+                              ? Duration(
+                                  milliseconds:
+                                      ((1500 * animatedBubbles.length - 2)))
+                              : const Duration(milliseconds: 750))
+                      .fadeIn(duration: 0.ms)
+                      .fadeOut(delay: 1000.ms, duration: 500.ms)
+                  : const SizedBox(),
+              _buildMessageComposer(formKey, answers)
+            ],
+          ),
         );
+      },
+    );
   }
-  //TODO: PUT ONE MORE ELSE IF RIGHT HERE FOR EXTRAS
 }

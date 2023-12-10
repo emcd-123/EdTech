@@ -17,32 +17,32 @@ class _LessonMeishiState extends State<LessonMeishi> {
     {
       'question': 'Fill in the correct prefix: ___水.',
       'questionType': "fillInTheBlank",
-      'answers': ['お', 'o'],
+      'answers': ['お', '御', 'o'],
     },
     {
       'question': 'Fill in the correct prefix: ___満足.',
       'questionType': "fillInTheBlank",
-      'answers': ['ご', 'go'],
+      'answers': ['ご', '御', 'go'],
     },
     {
       'question': 'Fill in the correct prefix: ___名前.',
       'questionType': "fillInTheBlank",
-      'answers': ['お', 'o'],
+      'answers': ['お', '御', 'o'],
     },
     {
       'question': 'Fill in the correct prefix: ___米.',
       'questionType': "fillInTheBlank",
-      'answers': ['お', 'o'],
+      'answers': ['お', '御', 'o'],
     },
     {
       'question': 'Fill in the correct prefix: ___気分.',
       'questionType': "fillInTheBlank",
-      'answers': ['ご', 'go'],
+      'answers': ['ご', '御', 'go'],
     },
     {
       'question': 'Fill in the correct prefix: ___質問.',
       'questionType': "fillInTheBlank",
-      'answers': ['ご', 'go'],
+      'answers': ['ご', '御', 'go'],
     },
   ];
 
@@ -66,7 +66,7 @@ class _LessonMeishiState extends State<LessonMeishi> {
           pageSnapping: true,
           children: [
             templateTitlePage(context, "assets/irasutoya/message_ogenkide.png",
-                "Honorific Prefixes: お and ご"),
+                "Honorific Prefixes:\nお and ご"),
             templatePageInfo(context, "assets/irasutoya/happy_schoolgirl.png",
                 "Given that keigo is a topic that intermediate or advanced Japanese language learners are mostly interested in, it is assumed that you are already fairly familiar with 丁寧語 (teineigo). Therefore, you should already be somewhat familar with this topic."),
             templatePageInfo(context, "assets/irasutoya/text_go_o.png",

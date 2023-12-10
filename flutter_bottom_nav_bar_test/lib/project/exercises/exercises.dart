@@ -139,37 +139,37 @@ final Map<String, List<Map<String, Object>>> exercises = {
     {
       'question': 'Fill in the correct prefix: ___水.',
       'questionType': "fillInTheBlank",
-      'answers': ['お', 'o'],
+      'answers': ['お', '御', 'o'],
       'image': ''
     },
     {
       'question': 'Fill in the correct prefix: ___満足.',
       'questionType': "fillInTheBlank",
-      'answers': ['ご', 'go'],
+      'answers': ['ご', '御', 'go'],
       'image': ''
     },
     {
       'question': 'Fill in the correct prefix: ___名前.',
       'questionType': "fillInTheBlank",
-      'answers': ['お', 'o'],
+      'answers': ['お', '御', 'o'],
       'image': ''
     },
     {
       'question': 'Fill in the correct prefix: ___米.',
       'questionType': "fillInTheBlank",
-      'answers': ['お', 'o'],
+      'answers': ['お', '御', 'o'],
       'image': ''
     },
     {
       'question': 'Fill in the correct prefix: ___気分.',
       'questionType': "fillInTheBlank",
-      'answers': ['ご', 'go'],
+      'answers': ['ご', '御', 'go'],
       'image': ''
     },
     {
       'question': 'Fill in the correct prefix: ___質問.',
       'questionType': "fillInTheBlank",
-      'answers': ['ご', 'go'],
+      'answers': ['ご', '御', 'go'],
       'image': ''
     },
   ],
@@ -265,7 +265,7 @@ final Map<String, List<Map<String, Object>>> exercises = {
       ]),
       'answerBubble': 2,
       'questionType': 'chat',
-      'answers': ['いらっしゃい', 'irasshai', 'irashai'],
+      'answers': ['いらっしゃい', 'irashai', 'irasshai'],
       'image': 'boss'
     }
   ]
