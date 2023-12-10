@@ -16,6 +16,7 @@ class DatabaseScreen extends StatefulWidget {
 class _DatabaseScreenState extends State<DatabaseScreen> {
   final textController = TextEditingController();
   int? selectedId;
+  bool decreaseReviewTimes = false;
   // final Future<List<Review>> _reviewSchedule =
   //     DatabaseHelper.instance.getReviewSchedule();
 
@@ -31,6 +32,18 @@ class _DatabaseScreenState extends State<DatabaseScreen> {
           children: <Widget>[
             const Text(
                 "Database Screen: Currently using to test the sqflite database"),
+            Row(
+              children: [
+                const Text("Decrease time toggle: "),
+                Switch(
+                    value: decreaseReviewTimes,
+                    onChanged: (bool value) {
+                      setState(() {
+                        decreaseReviewTimes = value;
+                      });
+                    })
+              ],
+            ),
             TextField(
               controller: textController,
             ),
@@ -105,8 +118,8 @@ class _DatabaseScreenState extends State<DatabaseScreen> {
         onPressed: () async {
           log(selectedId.toString());
           selectedId != null
-              ? await DatabaseHelper.instance
-                  .updateReviewAddDaysById(selectedId!, 3)
+              ? await DatabaseHelper.instance.updateReviewAddDaysById(
+                  selectedId!, decreaseReviewTimes ? -3 : 3)
               : await DatabaseHelper.instance.addReview(Review(
                   lessonName: textController.text,
                   nextReview: DateTime.now(),

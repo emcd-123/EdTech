@@ -79,6 +79,11 @@ class _LessonIkuState extends State<LessonIku> {
             templateTitlePage(
                 context, "assets/irasutoya/study_nihongo.png", "行く"),
             templateChatQuestion(context, _questions[1], image: "boss"),
+            templateYoutubeVideo(
+              context,
+              'dQw4w9WgXcQ',
+              "testing youtube video",
+            ),
             templateWorkInProgress(context)
           ],
         ),
