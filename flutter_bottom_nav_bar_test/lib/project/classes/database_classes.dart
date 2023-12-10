@@ -188,6 +188,9 @@ class DatabaseHelper {
     ''');
   }
 
-  Future<void> deleteDatabase(String path) =>
-      databaseFactory.deleteDatabase(path);
+  Future<void> deleteDatabase() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, 'spaced_rep.db');
+    databaseFactory.deleteDatabase(path);
+  }
 }

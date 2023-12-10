@@ -74,7 +74,7 @@ class _LessonWhyLearnKeigoState extends State<LessonWhyLearnKeigo> {
               templatePageInfo(context, "assets/irasutoya/music_kids.png",
                   "The second reason that non-native speakers will benefit from learning keigo is listening comprehension. Improving your understanding of keigo will help you understand what Japanese speakers are saying when they use it."),
               templateMultipleChoiceQuestion(context, _questions[0]),
-              templateLessonComplete(context, "Great Job!", "why_learn_keigo"),
+              templateLessonComplete(context, "Great Job!", "Why Learn Keigo?"),
             ],
           ),
         ),

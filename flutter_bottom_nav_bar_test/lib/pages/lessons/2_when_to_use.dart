@@ -89,7 +89,8 @@ class _LessonWhenToUseState extends State<LessonWhenToUse> {
                         "Given the complexity of keigo, Japanese speakers will not usually find it rude if a non-native speaker uses the wrong form. This topic can even be tricky for Japanese people sometimes, and they will recognize and appreciate the effort. The important thing is that you are making an effort to learn this language."),
                     templateMultipleChoiceQuestion(context, _questions[0]),
                     templateMultipleChoiceQuestion(context, _questions[1]),
-                    templateLessonComplete(context, "やった！", "when_keigo"),
+                    templateLessonComplete(
+                        context, "やった！", "When to Use Keigo"),
                   ],
                 ),
               ),

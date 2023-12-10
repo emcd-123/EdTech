@@ -104,7 +104,7 @@ The first form of keigo is 丁寧語 (teineigo). Luckily, if you have some exper
             templateLessonComplete(
                 context,
                 "Nice job! You now know the different types of keigo.",
-                "levels_of_respect"),
+                "Levels of Respect"),
           ],
         ),
       ),

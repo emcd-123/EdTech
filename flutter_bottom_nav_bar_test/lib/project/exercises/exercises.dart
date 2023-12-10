@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../classes/questions/chat_exercise.dart';
 
 final Map<String, List<Map<String, Object>>> exercises = {
-  'what_is_keigo': [
+  'What is Keigo?': [
     {
       'question':
           'The aspect of Japanese grammar that conveys respect is called: ___.',
@@ -12,7 +12,7 @@ final Map<String, List<Map<String, Object>>> exercises = {
       'image': ''
     },
   ],
-  'levels_of_respect': [
+  'Levels of Respect': [
     {
       'question': 'Use this keigo for talking about yourself: ___.',
       'questionType': "fillInTheBlank",
@@ -40,7 +40,7 @@ final Map<String, List<Map<String, Object>>> exercises = {
       'image': ''
     },
   ],
-  'when_keigo': [
+  'When to Use Keigo': [
     {
       'question': 'Which form to your boss (not about you)? ___.',
       'questionType': "fillInTheBlank",
@@ -135,7 +135,7 @@ final Map<String, List<Map<String, Object>>> exercises = {
       'image': ''
     },
   ],
-  'meishi': [
+  'Honorific Prefixes': [
     {
       'question': 'Fill in the correct prefix: ___水.',
       'questionType': "fillInTheBlank",

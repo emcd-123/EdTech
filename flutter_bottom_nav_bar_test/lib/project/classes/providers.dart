@@ -102,11 +102,14 @@ class NotificationProvider extends ChangeNotifier {
   Future<bool> setNotificationLesson(DateTime cachedNotification) async {
     // if there is no notification schedule or the notification has already happened and a new one is not scheduled, schedule another
     dev.log("IN THE REVIEW SETTER");
-    nextNotification = await NotificationStorage().readNotificationFile();
+    DateTime data = await NotificationStorage().readNotificationFile();
+    dev.log(data.toString());
+    if (data == null) {
+      nextNotification = DateTime(1970, 1, 1);
+    }
     dev.log("HERE IS NEXT NOTIFICATION");
     dev.log(nextNotification.toString());
-    if (nextNotification == null ||
-        nextNotification!.isBefore(DateTime.now())) {
+    if (nextNotification!.isBefore(DateTime.now())) {
       nextNotification = cachedNotification;
 
       NotificationStorage().writeNotification(nextNotification);

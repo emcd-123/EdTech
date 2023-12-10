@@ -89,7 +89,7 @@ class _LessonMeishiState extends State<LessonMeishi> {
             templateLessonComplete(
                 context,
                 "Nice job! You now know the honorific prefixes お and ご",
-                "honorific_prefix"),
+                "Honorific Prefixes"),
           ],
         ),
       ),
