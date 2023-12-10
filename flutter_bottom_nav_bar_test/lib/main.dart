@@ -3,6 +3,7 @@ import 'package:flutter_bottom_nav_bar_test/project/classes/providers.dart';
 import 'package:flutter_bottom_nav_bar_test/project/routes/app_route_config.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 import 'project/classes/notifications.dart';
 
@@ -17,6 +18,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ScoreKeeperProvider()),
@@ -28,7 +34,7 @@ class MyApp extends StatelessWidget {
         title: "Keigo Dojo",
         theme: ThemeData(
           primarySwatch: Colors.red,
-          textTheme: TextTheme(
+          textTheme: const TextTheme(
               titleMedium: TextStyle(
                 fontSize: 18,
               ),

@@ -42,6 +42,7 @@ class _MCQuestionState extends State<MCQuestion>
                   padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                   child: Text(
                     widget.question['question'].toString(),
+                    textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

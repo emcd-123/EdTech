@@ -164,14 +164,14 @@ class DatabaseHelper {
 
   Future<int> updateReviewAddDaysById(int id, int days) async {
     Database db = await instance.database;
-    var data = await db
-        .query("review_schedule", where: 'lessonName = ?', whereArgs: [id]);
+    var data =
+        await db.query("review_schedule", where: 'id = ?', whereArgs: [id]);
 
     Review updatedReview = Review.fromMap(data[0]);
 
     updatedReview.nextReview =
         updatedReview.nextReview.add(Duration(days: days));
-    log(updatedReview.nextReview as String);
+    log(updatedReview.nextReview.toString());
     updatedReview.reviewStrength = days;
     log("HERE IS THE UPDATED REVIEW");
     log(updatedReview.nextReview.toString());
@@ -188,6 +188,9 @@ class DatabaseHelper {
     ''');
   }
 
-  Future<void> deleteDatabase(String path) =>
-      databaseFactory.deleteDatabase(path);
+  Future<void> deleteDatabase() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, 'spaced_rep.db');
+    databaseFactory.deleteDatabase(path);
+  }
 }

@@ -35,7 +35,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
               if (reviewList.toString() == '[]') {
                 howManyReviewsText =
-                    "No reviews due now. Would you like to do extra practice?";
+                    "No reviews due now.\nWould you like to do extra practice?";
               } else {
                 int? numberOfReviews = reviewList?.length;
 
@@ -48,7 +48,10 @@ class _PracticeScreenState extends State<PracticeScreen> {
                 children: [
                   Padding(
                       padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                      child: Text(howManyReviewsText)),
+                      child: Text(
+                        howManyReviewsText,
+                        textAlign: TextAlign.center,
+                      )),
                   ElevatedButton(
                     onPressed: () {
                       GoRouter.of(context).push('/practice_lesson');

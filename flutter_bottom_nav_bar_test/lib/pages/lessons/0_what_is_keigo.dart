@@ -70,7 +70,7 @@ class _LessonWhatIsKeigoState extends State<LessonWhatIsKeigo> {
               templateLessonComplete(
                   context,
                   "Well Done! You have completed the first step towards mastering keigo!",
-                  "what_is_keigo")
+                  "What is Keigo?")
             ],
           ),
         ),

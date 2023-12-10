@@ -8,6 +8,7 @@ import 'package:flutter_bottom_nav_bar_test/project/classes/providers.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../classes/questions/fill_blank_question.dart';
 import '../classes/notifications.dart';
@@ -121,6 +122,95 @@ Container templatePageInfo(context, image, text,
   }
 }
 
+Container templateYoutubeVideo(context, videoUrl, text,
+    {String tooltip = "", bool longText = false
+    //int textSize
+    }) {
+  List<Widget> children = [];
+  YoutubePlayerController _controller = YoutubePlayerController(
+      initialVideoId: videoUrl,
+      flags: const YoutubePlayerFlags(autoPlay: false, mute: false));
+
+  if (tooltip != "") {
+    children = [
+      YoutubePlayer(controller: _controller),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: const EdgeInsets.fromLTRB(0, 0, 8, 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                JustTheTooltip(
+                  preferredDirection: AxisDirection.up,
+                  elevation: 8,
+                  isModal: true,
+                  content: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      tooltip,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ),
+                  child: const Material(
+                    color: Colors.yellowAccent,
+                    shape: CircleBorder(),
+                    elevation: 4.0,
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.lightbulb_outline,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: Text(
+              text,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          )
+        ],
+      )
+    ];
+  } else {
+    children = [
+      YoutubePlayer(controller: _controller),
+      Container(
+        padding: const EdgeInsets.only(left: 15, right: 15),
+        child: Text(text, style: Theme.of(context).textTheme.bodyMedium),
+      )
+    ];
+  }
+
+  if (longText == false) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: children,
+      ),
+    );
+  } else {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      color: Colors.white,
+      child: ListView(
+        children: children,
+      ),
+    );
+  }
+}
+
 Container templateLessonComplete(context, text, lessonName) {
   return Container(
     width: MediaQuery.of(context).size.width,
@@ -136,9 +226,14 @@ Container templateLessonComplete(context, text, lessonName) {
             padding: const EdgeInsets.only(left: 15, right: 15),
             child: scoreKeeperProvider.totalScore ==
                     scoreKeeperProvider.requiredScore
-                ? Text(text)
+                ? Text(
+                    text,
+                    textAlign: TextAlign.center,
+                  )
                 : const Text(
-                    "Finish all the exercises before completing the lesson"),
+                    "Finish all the exercises\nbefore completing the lesson",
+                    textAlign: TextAlign.center,
+                  ),
           ),
           ElevatedButton(
               onPressed: scoreKeeperProvider.totalScore ==
