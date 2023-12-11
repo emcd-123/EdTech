@@ -41,10 +41,17 @@ Container templatePageInfo(context, image, text,
     //int textSize
     }) {
   List<Widget> children = [];
+  int mediaWidth = 1;
+  if (image == "assets/irasutoya/tablet_businessman.png") {
+    mediaWidth = 2;
+  }
 
   if (tooltip != "") {
     children = [
-      Image(image: AssetImage(image)),
+      Image(
+        image: AssetImage(image),
+        width: MediaQuery.of(context).size.width / mediaWidth,
+      ),
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -92,7 +99,10 @@ Container templatePageInfo(context, image, text,
     ];
   } else {
     children = [
-      Image(image: AssetImage(image)),
+      Image(
+        image: AssetImage(image),
+        width: MediaQuery.of(context).size.width / mediaWidth,
+      ),
       Container(
         padding: const EdgeInsets.only(left: 15, right: 15),
         child: Text(text, style: Theme.of(context).textTheme.bodyMedium),
@@ -212,6 +222,8 @@ Container templateYoutubeVideo(context, videoUrl, text,
 }
 
 Container templateLessonComplete(context, text, lessonName) {
+  List<String> databaseBlacklist = ["Why Learn Keigo?"];
+
   return Container(
     width: MediaQuery.of(context).size.width,
     height: MediaQuery.of(context).size.height,
@@ -240,19 +252,21 @@ Container templateLessonComplete(context, text, lessonName) {
                       scoreKeeperProvider.requiredScore
                   ? () {
                       // This section adds a new review entry into the sql database
-                      DatabaseHelper.instance
-                          .addReview(Review(
-                              lessonName: lessonName.toString(),
-                              nextReview:
-                                  DateTime.now().add(const Duration(days: 1)),
-                              reviewStrength: 1))
-                          .then((value) {
-                        // this one will display a notification in 24 hours once the lesson in complete
-                        // TODO: add a provider that will keep track of notifications so that they only get sent once every 24 hours in order to not be annoying
-                        // This will also use the notification provider as well
-                        log(value.toString());
-                        if (value != -1) {}
-                      });
+                      !databaseBlacklist.contains(lessonName)
+                          ? DatabaseHelper.instance
+                              .addReview(Review(
+                                  lessonName: lessonName.toString(),
+                                  nextReview: DateTime.now()
+                                      .add(const Duration(days: 1)),
+                                  reviewStrength: 1))
+                              .then((value) {
+                              // this one will display a notification in 24 hours once the lesson in complete
+                              // TODO: add a provider that will keep track of notifications so that they only get sent once every 24 hours in order to not be annoying
+                              // This will also use the notification provider as well
+                              log(value.toString());
+                              if (value != -1) {}
+                            })
+                          : log("no database insert");
 
                       scoreKeeperProvider.clearTotalScore();
                       GoRouter.of(context).pop(context);

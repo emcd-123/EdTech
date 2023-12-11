@@ -16,16 +16,29 @@ class LessonIku extends StatefulWidget {
 class _LessonIkuState extends State<LessonIku> {
   final List<Map<String, Object>> _questions = [
     {
-      'question': 'Why should you learn keigo (choose multiple)?',
-      'questionType': "multipleChoice",
-      'answers': [
-        {
-          'answerText': 'To gain a deeper understanding of Japanese culture',
-          'score': true
-        },
-        {'answerText': 'To improve listening comprehension', 'score': true},
-        {'answerText': 'For the challenge', 'score': true},
+      'question': const [
+        ChatBubble(
+          text: '部長に聞いたんだけど、駅前にできたカレー屋さんがすごくおいしいらしいよ。',
+          isCurrentUser: true,
+        ),
+        ChatBubble(
+          text: 'そうなんだ。行ってみたいな。',
+          isCurrentUser: false,
+        ),
+        ChatBubble(
+          text: 'じゃあ、今日のランチ、その店に一緒に行く？',
+          isCurrentUser: true,
+        ),
+        ChatBubble(
+          text: 'うん、行くぞ。',
+          isCurrentUser: false,
+        ),
       ],
+      'answerBubble': 2,
+      'affixes': ['今日のランチ、その店に一緒に', '?'],
+      'questionType': 'chat',
+      'answers': ['行く', 'いく', 'iku'],
+      'image': 'assets/irasutoya/friend.jpg'
     },
     {
       'question': const [
@@ -50,9 +63,26 @@ class _LessonIkuState extends State<LessonIku> {
       'image': 'boss'
     },
     {
-      'question': 'The respectful form of keigo is called___.',
-      'questionType': "fillInTheBlank",
-      'answers': ['そんけいご', '尊敬語', 'sonkeigo', 'Sonkeigo'],
+      'question': const [
+        ChatBubble(
+          text: '何時にオフィスにいらっしゃいますか。',
+          isCurrentUser: true,
+        ),
+        ChatBubble(
+          text: '3時でしたら大丈夫です。',
+          isCurrentUser: false,
+        ),
+        ChatBubble(
+          text: 'では、3時に伺います。',
+          isCurrentUser: true,
+        ),
+        ChatBubble(text: "はい、よろしくお願いいたします。", isCurrentUser: false)
+      ],
+      'answerBubble': 2,
+      'affixes': ['では、3時に', 'ます。'],
+      'questionType': 'chat',
+      'answers': ['伺い', 'うかがい', 'ukagai'],
+      'image': 'assets/irasutoya/bowing_women.png'
     },
   ];
 
@@ -76,15 +106,22 @@ class _LessonIkuState extends State<LessonIku> {
           pageSnapping: true,
           scrollDirection: Axis.horizontal,
           children: [
-            templateTitlePage(
-                context, "assets/irasutoya/study_nihongo.png", "行く"),
-            templateChatQuestion(context, _questions[1], image: "boss"),
+            templateTitlePage(context, "assets/irasutoya/iku0.png", "行く"),
+            templatePageInfo(context, "assets/irasutoya/iku1.png",
+                "This is another convenient keigo word because the words for 'to go' and 'to come' use the same keigo, similar to how it works for 'to eat' and 'to drink'."),
+            templateChatQuestion(context, _questions[0],
+                image: 'assets/irasutoya/friend.jpg'),
             templateYoutubeVideo(
               context,
-              'dQw4w9WgXcQ',
-              "testing youtube video",
+              'ofpae7H6NS0',
+              "The word for 'to come' and 'to go' in Japanese is いらっしゃる (irassharu). You may have heard いらっしゃいませ (irasshaimase) when someone enters a store in Japan. This is a respectful way to say 'come in' to the customers",
             ),
-            templateWorkInProgress(context)
+            templateChatQuestion(context, _questions[1], image: "boss"),
+            templatePageInfo(context, "assets/irasutoya/iku2.png",
+                "Lastly, the 謙譲語 (kenjougo) word for 'to go/come' has two forms. You can either hear it as 伺う (ukagau) or as 参る (mairu)."),
+            templateChatQuestion(context, _questions[2],
+                image: 'assets/irasutoya/bowing_women.png'),
+            templateLessonComplete(context, "Nice job!", "行く・来る")
           ],
         ),
       ),

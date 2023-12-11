@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../project/classes/providers.dart';
+import '../../project/classes/questions/chat_exercise.dart';
 import '../../project/libraries/page_templates.dart';
 
 class LessonIru extends StatefulWidget {
@@ -15,21 +16,78 @@ class LessonIru extends StatefulWidget {
 class _LessonIruState extends State<LessonIru> {
   final List<Map<String, Object>> _questions = [
     {
-      'question': 'Why should you learn keigo (choose multiple)?',
-      'questionType': "multipleChoice",
-      'answers': [
-        {
-          'answerText': 'To gain a deeper understanding of Japanese culture',
-          'score': true
-        },
-        {'answerText': 'To improve listening comprehension', 'score': true},
-        {'answerText': 'For the challenge', 'score': true},
+      'question': const [
+        ChatBubble(
+          text: 'もしもし、田中だけど。',
+          isCurrentUser: false,
+        ),
+        ChatBubble(
+          text: 'もしもし、どうしたの？',
+          isCurrentUser: true,
+        ),
+        ChatBubble(
+          text: '旅行に行ったからお土産を渡したいんだけど、今家にいる？',
+          isCurrentUser: false,
+        ),
+        ChatBubble(
+          text: 'いるよ。',
+          isCurrentUser: true,
+        ),
+        ChatBubble(text: "じゃあ今から行くね。", isCurrentUser: false)
       ],
+      'answerBubble': 3,
+      'affixes': [' ', 'よ。                                    '],
+      'questionType': 'chat',
+      'answers': ['いる', 'います', 'iru', 'imasu'],
+      'image': 'assets/irasutoya/denwa_kaiwa.png'
     },
     {
-      'question': 'The respectful form of keigo is called___.',
-      'questionType': "fillInTheBlank",
-      'answers': ['そんけいご', '尊敬語', 'sonkeigo', 'Sonkeigo'],
+      'question': const [
+        ChatBubble(
+          text: 'ミーティングをしたいのですが、いつがよろしいでしょうか。',
+          isCurrentUser: true,
+        ),
+        ChatBubble(
+          text: '明日でしたら空いています。',
+          isCurrentUser: false,
+        ),
+        ChatBubble(
+          text: '承知いたしました。何時ごろでしたら...',
+          isCurrentUser: true,
+        ),
+        ChatBubble(
+          text: 'オフィスにいらっしゃいますか？',
+          isCurrentUser: true,
+        ),
+        ChatBubble(text: "午後2時でお願いいたします。", isCurrentUser: false)
+      ],
+      'answerBubble': 3,
+      'affixes': ['オフィスに', 'ますか？'],
+      'questionType': 'chat',
+      'answers': ['いらっしゃい', 'irashai', 'irasshai'],
+      'image': 'assets/irasutoya/bowing_women.png'
+    },
+    {
+      'question': const [
+        ChatBubble(
+          text: '高橋部長はいらっしゃいますでしょうか。',
+          isCurrentUser: false,
+        ),
+        ChatBubble(
+          text: '申し訳ございません、今は席を外しております。何時ごろでしたらいらっしゃいますか。',
+          isCurrentUser: true,
+        ),
+        ChatBubble(
+          text: '4時にはオフィスにおります。',
+          isCurrentUser: true,
+        ),
+        ChatBubble(text: "わかりました、では４時ごろにまたお電話いたします。", isCurrentUser: false)
+      ],
+      'answerBubble': 2,
+      'affixes': ['4時にはオフィスに', 'ます。'],
+      'questionType': 'chat',
+      'answers': ['おり', 'ori', 'ori'],
+      'image': 'assets/irasutoya/kaisha_denwa.png'
     },
   ];
 
@@ -54,8 +112,20 @@ class _LessonIruState extends State<LessonIru> {
           scrollDirection: Axis.horizontal,
           children: [
             templateTitlePage(
-                context, "assets/irasutoya/study_nihongo.png", "いる"),
-            templateWorkInProgress(context)
+                context, "assets/irasutoya/kokusai_woman.png", "To Exist: いる"),
+            templatePageInfo(context, "assets/irasutoya/alien.png",
+                "The word for 'to exist' in Japanese is ある／あります for inanimate objects and いる／います for animate objects. It is used for a lot more situations than it would be in English. For example, it is often used to ask where something is."),
+            templateChatQuestion(context, _questions[0],
+                image: "assets/irasutoya/denwa_kaiwa.png"),
+            templatePageInfo(context, "assets/irasutoya/super_businessman.png",
+                "Next, the 尊敬語 (sonkeigo) word for 'to exist' is いらっしゃる (irassharu)."),
+            templateChatQuestion(context, _questions[1],
+                image: "assets/irasutoya/bowing_women.png"),
+            templatePageInfo(context, "assets/irasutoya/kenjougo.jpg",
+                "The 謙譲語 (kenjougo) way to say 'to exist' is おります."),
+            templateChatQuestion(context, _questions[2],
+                image: "assets/irasutoya/kaisha_denwa.png"),
+            templateLessonComplete(context, "Nice job!", "To Exist: いる")
           ],
         ),
       ),

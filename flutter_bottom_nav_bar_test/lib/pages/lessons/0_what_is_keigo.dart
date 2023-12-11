@@ -61,7 +61,8 @@ class _LessonWhatIsKeigoState extends State<LessonWhatIsKeigo> {
               templatePageInfo(context, "assets/irasutoya/nihonchizu.png",
                   """While it's not uncommon for languages to have more formal ways of speaking, what makes Japanese difficult for learners is how much more complicated its rules are."""),
               templatePageInfo(context, "assets/irasutoya/study_woman6.png",
-                  """In addition, the way that keigo is often taught in textbooks is usually inadequate for learning. Typically, keigo is presented as a table of different phrases and grammatical rules that the learner is expected to memorize. This ignores the sociocultural context of the conversation that is paramount to using keigo correctly."""),
+                  """In addition, the way that keigo is often taught in textbooks is usually inadequate for learning. Typically, keigo is presented as a table of different phrases and grammatical rules that the learner is expected to memorize. This ignores the sociocultural context of the conversation that is paramount to using keigo correctly.""",
+                  longText: true),
               templatePageInfo(
                   context,
                   "assets/irasutoya/online_school_boy.png",

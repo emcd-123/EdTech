@@ -42,12 +42,12 @@ class LessonList {
 
     lessons.add(LessonList(
         topic: "To Be: だ",
-        iconPath: "assets/svg/sushi.svg",
+        iconPath: "assets/svg/letter.svg",
         lessonPath: "/copula"));
 
     lessons.add(LessonList(
         topic: "食べる・飲む",
-        iconPath: "assets/svg/fuji.svg",
+        iconPath: "assets/svg/sushi.svg",
         lessonPath: "/taberu_nomu"));
 
     lessons.add(LessonList(
@@ -58,7 +58,7 @@ class LessonList {
     lessons.add(
       LessonList(
         topic: "To Do: する",
-        iconPath: "assets/svg/letter.svg",
+        iconPath: "assets/svg/fuji.svg",
         lessonPath: "/suru",
       ),
     );

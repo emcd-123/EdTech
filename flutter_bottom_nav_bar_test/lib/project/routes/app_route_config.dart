@@ -36,7 +36,7 @@ import 'package:flutter_bottom_nav_bar_test/pages/lessons/5_taberu_nomu.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/6_iru_teiru.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/7_suru.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/8_iku.dart';
-import 'package:flutter_bottom_nav_bar_test/pages/lessons/9_kuru.dart';
+// import 'package:flutter_bottom_nav_bar_test/pages/lessons/9_kuru.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/lessons/10_ingroups_outgroups.dart';
 import 'package:flutter_bottom_nav_bar_test/pages/practice_page.dart';
 import 'package:flutter_bottom_nav_bar_test/project/classes/scaffold_with_nav_bar.dart';
@@ -169,12 +169,12 @@ class MyShellRouter {
           return const LessonIku();
         },
       ),
-      GoRoute(
-        path: '/kuru',
-        builder: (context, state) {
-          return const LessonKuru();
-        },
-      ),
+      // GoRoute(
+      //   path: '/kuru',
+      //   builder: (context, state) {
+      //     return const LessonKuru();
+      //   },
+      // ),
       GoRoute(
         path: '/uchi_soto',
         builder: (context, state) {

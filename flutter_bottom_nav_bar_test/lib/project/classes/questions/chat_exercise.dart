@@ -258,6 +258,11 @@ class _ChatQuestionState extends State<ChatQuestion>
       mediaWidth = 1;
     } else if (widget.image == "friend") {
       widget.image = "assets/irasutoya/friend.jpg";
+    } else if (widget.image == "shoukai") {
+      widget.image = "assets/irasutoya/shoukai.png";
+    } else if (widget.image == "boss_eat") {
+      widget.image = "assets/irasutoya/boss_eat.png";
+      mediaWidth = 1;
     }
 
     List<Widget> chat = widget.question["question"] as List<Widget>;
